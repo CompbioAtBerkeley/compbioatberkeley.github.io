@@ -2,41 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Computational Biology at Berkeley Design System
+All colors MUST be HSL - Biology meets Computation theme
 */
 
 @layer base {
   :root {
+    /* Core biology-inspired palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 210 24% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 24% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 24% 16%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Deep forest green for biology */
+    --primary: 155 68% 31%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 155 68% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Soft scientific blue */
+    --secondary: 210 45% 95%;
+    --secondary-foreground: 210 24% 16%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Bio-green accents from the course table */
+    --bio-green: 122 83% 67%; /* #73EC8B */
+    --bio-green-light: 82 100% 71%; /* #D2FF72 */
+    --bio-green-foreground: 155 68% 12%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Computation blue accent */
+    --compute-blue: 215 84% 65%;
+    --compute-blue-light: 215 84% 85%;
+    --compute-blue-foreground: 215 84% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --accent: 122 83% 67%;
+    --accent-foreground: 155 68% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 155 68% 31%;
 
     --radius: 0.5rem;
+
+    /* Beautiful gradients for hero sections */
+    --gradient-bio: linear-gradient(135deg, hsl(155 68% 31%), hsl(122 83% 67%));
+    --gradient-compute: linear-gradient(135deg, hsl(215 84% 65%), hsl(155 68% 31%));
+    --gradient-hero: linear-gradient(135deg, hsl(155 68% 31%) 0%, hsl(122 83% 67%) 50%, hsl(215 84% 65%) 100%);
+    
+    /* Elegant shadows with bio-green glow */
+    --shadow-bio: 0 10px 30px -10px hsl(122 83% 67% / 0.3);
+    --shadow-glow: 0 0 40px hsl(122 83% 67% / 0.2);
+    --shadow-compute: 0 10px 30px -10px hsl(215 84% 65% / 0.3);
+    
+    /* Smooth scientific transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,41 +84,42 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 210 24% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 210 24% 10%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 210 24% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 122 83% 67%;
+    --primary-foreground: 155 68% 12%;
+    --primary-glow: 122 83% 80%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 24% 16%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --bio-green: 122 83% 67%;
+    --bio-green-light: 82 100% 71%;
+    --bio-green-foreground: 155 68% 12%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --compute-blue: 215 84% 65%;
+    --compute-blue-light: 215 84% 85%;
+    --compute-blue-foreground: 215 84% 15%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 210 24% 16%;
+    --muted-foreground: 215 16% 57%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --accent: 122 83% 67%;
+    --accent-foreground: 155 68% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 24% 20%;
+    --input: 210 24% 20%;
+    --ring: 122 83% 67%;
   }
 }
 

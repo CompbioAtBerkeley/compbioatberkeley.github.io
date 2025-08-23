@@ -26,11 +26,22 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
+				},
+				'bio-green': {
+					DEFAULT: 'hsl(var(--bio-green))',
+					light: 'hsl(var(--bio-green-light))',
+					foreground: 'hsl(var(--bio-green-foreground))'
+				},
+				'compute-blue': {
+					DEFAULT: 'hsl(var(--compute-blue))',
+					light: 'hsl(var(--compute-blue-light))',
+					foreground: 'hsl(var(--compute-blue-foreground))'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -62,6 +73,20 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			backgroundImage: {
+				'gradient-bio': 'var(--gradient-bio)',
+				'gradient-compute': 'var(--gradient-compute)',
+				'gradient-hero': 'var(--gradient-hero)'
+			},
+			boxShadow: {
+				'bio': 'var(--shadow-bio)',
+				'glow': 'var(--shadow-glow)',
+				'compute': 'var(--shadow-compute)'
+			},
+			transitionProperty: {
+				'smooth': 'var(--transition-smooth)',
+				'glow': 'var(--transition-glow)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
