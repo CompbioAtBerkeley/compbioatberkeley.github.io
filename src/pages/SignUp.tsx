@@ -59,17 +59,7 @@ const SignUp = () => {
                 <h3 className="text-lg font-semibold mb-4">Follow us on social media</h3>
                 
                 <div className="space-y-4">
-                  <a 
-                    href="https://join.slack.com/t/computational-yzc4071/shared_invite/zt-3bqva9ctw-FdzQ~QsK90qYMhgBlWZKyg" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <EnhancedButton variant="hero" size="lg" className="w-full">
-                      Join our Slack
-                      <ExternalLink className="w-4 h-4" />
-                    </EnhancedButton>
-                  </a>
+                  
                   
                   <EnhancedButton variant="bio-outline" size="lg" className="w-full">
                     Follow on Instagram

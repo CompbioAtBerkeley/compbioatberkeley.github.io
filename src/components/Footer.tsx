@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
+import compBioLogo from "@/assets/comp-bio-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,9 +20,14 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-bio rounded-full flex items-center justify-center">
+              {/* <div className="w-8 h-8 bg-gradient-bio rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-sm">CB</span>
-              </div>
+              </div> */}
+              <img 
+              src={compBioLogo} 
+              alt="Computational Biology at Berkeley" 
+              className="h-10 w-10 object-contain"
+            />
               <span className="font-semibold text-lg bg-gradient-bio bg-clip-text text-transparent">
                 Computational Biology at Berkeley
               </span>
@@ -52,15 +58,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-compute-blue mb-4">Connect With Us</h3>
             <div className="space-y-2">
-              <a 
-                href="https://join.slack.com/t/computational-yzc4071/shared_invite/zt-3bqva9ctw-FdzQ~QsK90qYMhgBlWZKyg" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center text-muted-foreground hover:text-compute-blue transition-colors duration-200 text-sm"
-              >
-                Slack
-                <ExternalLink className="w-3 h-3 ml-1" />
-              </a>
+              
               <a 
                 href="#" 
                 className="flex items-center text-muted-foreground hover:text-compute-blue transition-colors duration-200 text-sm"
