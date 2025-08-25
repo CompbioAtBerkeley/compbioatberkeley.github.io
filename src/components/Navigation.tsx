@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import compBioLogo from "@/assets/comp-bio-logo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,10 +25,12 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-bio rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">CB</span>
-            </div>
+          <Link to="/" className="flex items-center space-x-3">
+            <img 
+              src={compBioLogo} 
+              alt="Computational Biology at Berkeley" 
+              className="h-10 w-10 object-contain"
+            />
             <span className="font-semibold text-lg bg-gradient-bio bg-clip-text text-transparent">
               Computational Biology at Berkeley
             </span>

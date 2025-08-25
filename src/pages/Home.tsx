@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { EnhancedButton } from "@/components/ui/enhanced-button";
 import { Card, CardContent } from "@/components/ui/card";
 import heroBg from "@/assets/hero-bg.jpg";
+import compBioLogo from "@/assets/comp-bio-logo.png";
 
 const Home = () => {
   return (
@@ -14,11 +15,13 @@ const Home = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         <div className="relative z-10 max-w-4xl mx-auto text-white">
-          {/* Logo placeholder - can be replaced with actual logo */}
+          {/* Logo */}
           <div className="mb-8 flex justify-center">
-            <div className="w-32 h-32 bg-gradient-bio rounded-full flex items-center justify-center shadow-glow">
-              <span className="text-4xl font-bold">CB</span>
-            </div>
+            <img 
+              src={compBioLogo} 
+              alt="Computational Biology at Berkeley" 
+              className="w-40 h-40 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+            />
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-bio-green-light to-compute-blue bg-clip-text text-transparent animate-pulse">
