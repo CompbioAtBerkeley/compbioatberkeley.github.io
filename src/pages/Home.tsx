@@ -25,7 +25,7 @@ const Home = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-bio-green-light to-compute-blue bg-clip-text text-transparent animate-pulse">
-            Advancing the Future of Biology through Computation
+            Computational Biology at Berkeley
           </h1>
           
           <p className="text-xl md:text-2xl mb-12 text-gray-200 max-w-3xl mx-auto leading-relaxed">
@@ -44,7 +44,7 @@ const Home = () => {
               </EnhancedButton>
             </a>
             
-            <a 
+            {/* <a 
               href="https://join.slack.com/t/computational-yzc4071/shared_invite/zt-3bqva9ctw-FdzQ~QsK90qYMhgBlWZKyg" 
               target="_blank" 
               rel="noopener noreferrer"
@@ -53,7 +53,7 @@ const Home = () => {
                 Join our Slack
                 <ExternalLink className="w-5 h-5" />
               </EnhancedButton>
-            </a>
+            </a> */}
           </div>
         </div>
       </section>

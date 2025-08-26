@@ -14,7 +14,7 @@ const Courses = () => {
       biological: "Genetics"
     },
     {
-      date: "Oct 19",
+      date: "Week of Oct 19",
       computational: "Data Science & Statistics",
       biological: "Sequencing"
     },
