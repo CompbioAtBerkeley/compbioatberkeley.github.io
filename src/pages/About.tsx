@@ -33,7 +33,7 @@ const About = () => {
                   <h3 className="text-2xl font-semibold text-bio-green">Educational Excellence</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Educational courses and workshops in computational biology, designed to bridge the gap between theoretical knowledge and practical application.
+                  Educational workshops in computational biology, designed to provide foundational knowledge on both biology and computer science, bridging the gap between theoretical knowledge and practical application.
                 </p>
               </CardContent>
             </Card>
@@ -75,7 +75,7 @@ const About = () => {
                   <h3 className="text-2xl font-semibold text-accent-foreground">Community Impact</h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Community events that highlight computational biology's role in healthcare, sustainability, and beyond.
+                  Community projects using computational biology to positively impact healthcare, sustainability, and beyond.
                 </p>
               </CardContent>
             </Card>
