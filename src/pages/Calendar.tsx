@@ -25,7 +25,7 @@ const Calendar = () => {
           <CardContent className="p-6">
             <div className="w-full overflow-hidden rounded-lg border border-bio-green/20">
               <iframe 
-                src="https://calendar.google.com/calendar/embed?src=c_89fd0fd6639f6879e54e29cf6160bd6b715c0d824d84fdc0166332e82c13404c%40group.calendar.google.com&ctz=Asia%2FHong_Kong" 
+                src="https://calendar.google.com/calendar/embed?src=c_89fd0fd6639f6879e54e29cf6160bd6b715c0d824d84fdc0166332e82c13404c%40group.calendar.google.com&cctz=America%2FLos_Angeles" 
                 className="w-full h-[600px] border-0"
                 title="Computational Biology at Berkeley Events Calendar"
               />
@@ -33,7 +33,7 @@ const Calendar = () => {
             
             <div className="mt-6 text-center">
               <a 
-                href="https://calendar.google.com/calendar/embed?src=c_89fd0fd6639f6879e54e29cf6160bd6b715c0d824d84fdc0166332e82c13404c%40group.calendar.google.com&ctz=Asia%2FHong_Kong" 
+                href="https://calendar.google.com/calendar/embed?src=c_89fd0fd6639f6879e54e29cf6160bd6b715c0d824d84fdc0166332e82c13404c%40group.calendar.google.com&ctz=America%2FLos_Angeles" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -48,7 +48,7 @@ const Calendar = () => {
 
         <div className="mt-8 text-center">
           <p className="text-muted-foreground">
-            All times are shown in Hong Kong timezone. Subscribe to our calendar to get notifications about upcoming events!
+            All times are shown in PST. Subscribe to our calendar to get notifications about upcoming events!
           </p>
         </div>
       </div>

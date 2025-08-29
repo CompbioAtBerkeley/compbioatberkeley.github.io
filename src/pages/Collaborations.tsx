@@ -26,10 +26,10 @@ const Collaborations = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
-                We can help you with a year long research project that advances the current science in computational biology.
+                We can help you build computational tools and analyze data to accelerate your biological research.
               </p>
               <EnhancedButton variant="bio-solid" size="lg">
-                Contact our Projects Head
+                Contact our Projects Lead
                 <ExternalLink className="w-4 h-4" />
               </EnhancedButton>
             </CardContent>
@@ -40,7 +40,7 @@ const Collaborations = () => {
             <CardHeader>
               <CardTitle className="flex items-center text-2xl text-compute-blue">
                 <Users className="w-6 h-6 mr-3" />
-                Talk about your research
+                Share your experiences
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -49,7 +49,7 @@ const Collaborations = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <EnhancedButton variant="compute-solid" size="lg">
-                  Contact our Academic Head
+                  Contact our Academic Lead
                   <Mail className="w-4 h-4" />
                 </EnhancedButton>
               </div>
@@ -74,15 +74,15 @@ const Collaborations = () => {
                   <ul className="text-sm text-muted-foreground space-y-1">
                     <li>• Top Undergraduates in Computational Biology</li>
                     <li>• Software Development for Research</li>
-                    <li>• Community Based Projects that diversify gene pools</li>
+                    <li>• A platform to promote your events and opportunities</li>
                   </ul>
                 </div>
                 <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
                   <h4 className="font-semibold mb-2 text-primary">What we are looking for (open to discussion)</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Company Tours</li>
-                    <li>• Computational Resources/Mentorship</li>
-                    <li>• Research partnerships</li>
+                    <li>• Company Tours and Connections </li>
+                    <li>• Computational Resources and Mentorship</li>
+                    <li>• Research Partnerships</li>
                   </ul>
                 </div>
               </div>

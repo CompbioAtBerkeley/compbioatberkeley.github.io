@@ -26,11 +26,11 @@ const SignUp = () => {
                 Sign up for our newsletter to receive updates about events, courses, and opportunities.
               </p>
               <iframe 
-                src="https://forms.gle/nrsXrPFKA8CRn9P66"
+                src="https://forms.gle/bj6YNehfFS5Ytd8N6"
                 width="100%" 
                 height="400"
                 className="rounded-lg border border-bio-green/20"
-                title="Sign Up Form"
+                title="Interest Form"
               >
                 Loading...
               </iframe>
