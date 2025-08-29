@@ -36,7 +36,7 @@ const SignUp = () => {
               </iframe>
               <div className="mt-4">
                 <a 
-                  href="https://forms.gle/nrsXrPFKA8CRn9P66" 
+                  href="https://forms.gle/bj6YNehfFS5Ytd8N6" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >

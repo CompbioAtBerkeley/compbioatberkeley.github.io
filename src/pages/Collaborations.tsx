@@ -72,17 +72,17 @@ const Collaborations = () => {
                 <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
                   <h4 className="font-semibold mb-2 text-primary">What we can provide</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Top Undergraduates in Computational Biology</li>
-                    <li>• Software Development for Research</li>
+                    <li>• Top undergraduates in computational biology</li>
+                    <li>• Software development for research</li>
                     <li>• A platform to promote your events and opportunities</li>
                   </ul>
                 </div>
                 <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
                   <h4 className="font-semibold mb-2 text-primary">What we are looking for (open to discussion)</h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Company Tours and Connections </li>
-                    <li>• Computational Resources and Mentorship</li>
-                    <li>• Research Partnerships</li>
+                    <li>• Company tours and connections</li>
+                    <li>• Computational resources and mentorship</li>
+                    <li>• Research partnerships</li>
                   </ul>
                 </div>
               </div>
