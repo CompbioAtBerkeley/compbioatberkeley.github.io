@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
+    "build": "npm run fetch-data && vite build",
+    "build:dev": "npm run fetch-data && vite build --mode development",
+    "fetch-data": "node scripts/fetch-officers.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
