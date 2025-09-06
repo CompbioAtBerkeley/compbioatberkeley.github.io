@@ -1,8 +1,15 @@
+// Interface matching the current officers.json structure
 export interface Officer {
-  [key: string]: string;
+  name: string;
+  role: string;
+  image: string;
+  "personal website": string;
+  linkedin: string;
+  github: string;
+  orcid: string;
 }
 
-// Common expected fields (these may vary based on your Google Sheet structure)
+// Legacy interface for backward compatibility
 export interface StandardOfficer {
   Name?: string;
   Position?: string;

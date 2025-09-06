@@ -13,7 +13,7 @@ export const useOfficers = () => {
         setError(null);
         
         // Fetch from the pre-built JSON file
-        const response = await fetch('/officers.json');
+        const response = await fetch('/fetched/officers.json');
         
         if (!response.ok) {
           throw new Error(`Failed to fetch officers data: ${response.status}`);

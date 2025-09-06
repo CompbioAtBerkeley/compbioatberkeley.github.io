@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, Github, User } from "lucide-react";
+import { Mail, Linkedin, Github, User, ExternalLink } from "lucide-react";
 import { Officer } from "@/types/officers";
 
 interface OfficerCardProps {
@@ -8,16 +8,17 @@ interface OfficerCardProps {
 }
 
 export const OfficerCard = ({ officer }: OfficerCardProps) => {
-  // Common field mappings - adjust based on your Google Sheet columns
-  const name = officer.Name || officer.name || '';
-  const position = officer.Position || officer.Role || officer.role || '';
-  const email = officer.Email || officer.email || '';
-  const year = officer.Year || officer.year || '';
-  const major = officer.Major || officer.major || '';
-  const bio = officer.Bio || officer.bio || officer.Description || officer.description || '';
-  const linkedin = officer.LinkedIn || officer.linkedin || '';
-  const github = officer.GitHub || officer.github || '';
-  const photo = officer.Photo || officer['Photo URL'] || officer.photo || '';
+  // Use the current JSON structure fields
+  const name = officer.name || '';
+  const role = officer.role || '';
+  const image = officer.image || '';
+  const personalWebsite = officer["personal website"] || '';
+  const linkedin = officer.linkedin || '';
+  const github = officer.github || '';
+  const orcid = officer.orcid || '';
+
+  // Default placeholder image path
+  const defaultImage = '/placeholder.svg';
 
   return (
     <Card className="border-bio-green/20 hover:shadow-bio transition-all duration-300 h-full">
@@ -25,57 +26,46 @@ export const OfficerCard = ({ officer }: OfficerCardProps) => {
         <div className="flex flex-col items-center text-center space-y-4">
           {/* Profile Image */}
           <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-bio flex items-center justify-center">
-            {photo ? (
+            {image ? (
               <img
-                src={photo}
+                src={image}
                 alt={name}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  target.nextElementSibling?.classList.remove('hidden');
+                  target.src = defaultImage;
                 }}
               />
-            ) : null}
-            <div className={`${photo ? 'hidden' : 'flex'} w-12 h-12 text-white items-center justify-center`}>
-              <User className="w-8 h-8" />
-            </div>
+            ) : (
+              <img
+                src={defaultImage}
+                alt={name}
+                className="w-full h-full object-cover opacity-70"
+              />
+            )}
           </div>
 
-          {/* Name and Position */}
+          {/* Name and Role */}
           <div className="space-y-2">
             <h3 className="text-xl font-bold text-bio-green">{name}</h3>
-            {position && (
+            {role && (
               <Badge variant="secondary" className="bg-bio-green/10 text-bio-green">
-                {position}
+                {role}
               </Badge>
             )}
           </div>
 
-          {/* Academic Info */}
-          {(year || major) && (
-            <div className="text-sm text-muted-foreground space-y-1">
-              {year && <div>Class of {year}</div>}
-              {major && <div>{major}</div>}
-            </div>
-          )}
-
-          {/* Bio */}
-          {bio && (
-            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-              {bio}
-            </p>
-          )}
-
           {/* Contact Links */}
           <div className="flex space-x-4 pt-2">
-            {email && (
+            {personalWebsite && (
               <a
-                href={`mailto:${email}`}
+                href={personalWebsite.startsWith('http') ? personalWebsite : `https://${personalWebsite}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-bio-green hover:text-bio-green/80 transition-colors"
-                title="Email"
+                title="Personal Website"
               >
-                <Mail className="w-5 h-5" />
+                <ExternalLink className="w-5 h-5" />
               </a>
             )}
             {linkedin && (
@@ -98,6 +88,19 @@ export const OfficerCard = ({ officer }: OfficerCardProps) => {
                 title="GitHub"
               >
                 <Github className="w-5 h-5" />
+              </a>
+            )}
+            {orcid && (
+              <a
+                href={orcid.startsWith('http') ? orcid : `https://orcid.org/${orcid}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-bio-green hover:text-bio-green/80 transition-colors"
+                title="ORCID"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.525.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.781-1.4 3.781-3.722 0-2.016-1.178-3.722-3.781-3.722h-2.297z"/>
+                </svg>
               </a>
             )}
           </div>
