@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Google Sheets URL - converts to CSV export
-const GOOGLE_SHEET_ID = '14UbNA9sB8NsfEnz-2FIDWwfZiG6E3yNHHsF6gQtaa4Y';
+const GOOGLE_SHEET_ID = '1N8vuOaxZoHAhiLSN-WTOkeHmXe9BMQok64w1z4GwC-g';
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=csv`;
 
 // Output path
@@ -64,13 +64,39 @@ function csvToJson(csvData) {
     if (values.length > 0 && values.some(val => val.trim() !== '')) {
       const obj = {};
       headers.forEach((header, index) => {
-        obj[header.trim()] = values[index]?.trim() || '';
+        const value = values[index]?.trim() || '';
+        
+        // Transform Google Drive image URLs
+        if (header.trim().toLowerCase() === 'image' && value) {
+          obj[header.trim()] = transformGoogleDriveUrl(value);
+        } else {
+          obj[header.trim()] = value;
+        }
       });
       data.push(obj);
     }
   }
   
   return data;
+}
+
+function transformGoogleDriveUrl(url) {
+  // Check if it's a Google Drive URL
+  if (!url.includes('drive.google.com')) {
+    return url; // Return as-is if not a Google Drive URL
+  }
+  
+  // Extract file ID from various Google Drive URL formats
+  const fileIdMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  
+  if (fileIdMatch && fileIdMatch[1]) {
+    const fileId = fileIdMatch[1];
+    return `https://drive.usercontent.google.com/download?id=${fileId}`;
+  }
+  
+  // If we can't extract the file ID, return the original URL
+  console.warn(`Could not extract file ID from URL: ${url}`);
+  return url;
 }
 
 function parseCSVRow(row) {
