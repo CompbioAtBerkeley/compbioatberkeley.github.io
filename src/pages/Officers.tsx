@@ -95,9 +95,11 @@ const Officers = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {officers.map((officer, index) => (
-            <OfficerCard key={index} officer={officer} />
+            <div key={index} className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+              <OfficerCard officer={officer} />
+            </div>
           ))}
         </div>
 
