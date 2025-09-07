@@ -9,13 +9,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Google Sheets URL - converts to CSV export
-const GOOGLE_SHEET_ID = '1N8vuOaxZoHAhiLSN-WTOkeHmXe9BMQok64w1z4GwC-g';
+const GOOGLE_SHEET_ID = '1N8vuOaxZoHAhiLSN-WTOkeHmXe9BMQok64w1z4GwC-g'; // TODO In future replace with env var. This is not a security issue, rather just a convenience for switching environments.
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=csv`;
 
 // Output paths
-const OUTPUT_DIR = path.join(__dirname, '../public/fetched');
+const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'fetched', 'officers');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'officers.json');
-const IMAGES_DIR = path.join(OUTPUT_DIR, 'officers');
+const IMAGES_DIR = OUTPUT_DIR;
 
 // Ensure images directory exists
 if (!fs.existsSync(IMAGES_DIR)) {
