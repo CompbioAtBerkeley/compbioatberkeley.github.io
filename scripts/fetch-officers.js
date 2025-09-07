@@ -96,9 +96,11 @@ async function downloadImage(imageUrl, officerName) {
     const contentType = response.headers.get('content-type') || 'image/jpeg';
     const extension = getExtensionFromContentType(contentType);
     
-    // Create a safe filename using officer name
+    // Create a safe filename using officer name and a hash for uniqueness
     const safeOfficerName = officerName.toLowerCase().replace(/[^a-z0-9]/g, '_');
-    const filename = `${safeOfficerName}${extension}`;
+    // Use a hash of the officer name and image URL to ensure uniqueness
+    const hash = crypto.createHash('sha256').update(officerName + imageUrl).digest('hex').slice(0, 8);
+    const filename = `${safeOfficerName}_${hash}${extension}`;
     
     const imagePath = path.join(IMAGES_DIR, filename);
     
