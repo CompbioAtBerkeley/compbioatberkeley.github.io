@@ -66,7 +66,8 @@ async function processOfficerImages(officers) {
     if (officer.image && officer.image.trim() !== '') {
       try {
         console.log(`Downloading image for ${officer.name}...`);
-        const localImagePath = await downloadImage(officer.image, officer.name);
+        const extension = officer['image extension'] || '.jpg'; // Default to .jpg if no extension provided
+        const localImagePath = await downloadImage(officer.image, officer.name, extension);
         processedOfficer.image = localImagePath;
         console.log(`✓ Image downloaded for ${officer.name}: ${localImagePath}`);
       } catch (error) {
@@ -82,7 +83,7 @@ async function processOfficerImages(officers) {
   return processedOfficers;
 }
 
-async function downloadImage(imageUrl, officerName) {
+async function downloadImage(imageUrl, officerName, extension) {
   try {
     const response = await fetch(imageUrl);
     if (!response.ok) {
@@ -91,21 +92,21 @@ async function downloadImage(imageUrl, officerName) {
     
     const buffer = await response.arrayBuffer();
     const uint8Array = new Uint8Array(buffer);
+    const nodeBuffer = Buffer.from(uint8Array);
     
-    // Get content type to determine file extension
-    const contentType = response.headers.get('content-type') || 'image/jpeg';
-    const extension = getExtensionFromContentType(contentType);
-    
+    // Use the extension from the Google Sheet
+    const fileExtension = extension.startsWith('.') ? extension : `.${extension}`;
+  
     // Create a safe filename using officer name and a hash for uniqueness
     const safeOfficerName = officerName.toLowerCase().replace(/[^a-z0-9]/g, '_');
     // Use a hash of the officer name and image URL to ensure uniqueness
     const hash = crypto.createHash('sha256').update(officerName + imageUrl).digest('hex').slice(0, 8);
-    const filename = `${safeOfficerName}_${hash}${extension}`;
+    const filename = `${safeOfficerName}_${hash}${fileExtension}`;
     
     const imagePath = path.join(IMAGES_DIR, filename);
     
-    // Write the image file
-    fs.writeFileSync(imagePath, uint8Array);
+    // Write the image file using the node buffer
+    fs.writeFileSync(imagePath, nodeBuffer);
     
     // Return the public path (relative to public directory)
     return `/fetched/officers/${filename}`;
@@ -147,13 +148,14 @@ function csvToJson(csvData) {
     if (values.length > 0 && values.some(val => val.trim() !== '')) {
       const obj = {};
       headers.forEach((header, index) => {
+        const headerName = header.trim();
         const value = values[index]?.trim() || '';
         
         // Transform Google Drive image URLs
-        if (header.trim().toLowerCase() === 'image' && value) {
-          obj[header.trim()] = transformGoogleDriveUrl(value);
+        if (headerName.toLowerCase() === 'image' && value) {
+          obj[headerName] = transformGoogleDriveUrl(value);
         } else {
-          obj[header.trim()] = value;
+          obj[headerName] = value;
         }
       });
       data.push(obj);
