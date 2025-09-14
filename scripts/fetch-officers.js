@@ -8,6 +8,10 @@ import crypto from 'crypto';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Command line arguments
+const args = process.argv.slice(2);
+const forceRebuild = args.includes('--force') || args.includes('-f');
+
 // Google Sheets URL - converts to CSV export
 const GOOGLE_SHEET_ID = '1N8vuOaxZoHAhiLSN-WTOkeHmXe9BMQok64w1z4GwC-g'; // TODO In future replace with env var. This is not a security issue, rather just a convenience for switching environments.
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=csv`;
@@ -16,6 +20,7 @@ const CSV_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/expor
 const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'fetched', 'officers');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'officers.json');
 const IMAGES_DIR = OUTPUT_DIR;
+const HASH_TRACKING_FILE = path.join(OUTPUT_DIR, '.sheet-hash');
 
 // Ensure images directory exists
 if (!fs.existsSync(IMAGES_DIR)) {
@@ -34,6 +39,25 @@ async function fetchOfficersData() {
     const csvData = await response.text();
     console.log('CSV data fetched successfully');
     
+    // Create hash of the CSV data
+    const currentHash = crypto.createHash('sha256').update(csvData).digest('hex');
+    console.log(`Current sheet hash: ${currentHash.slice(0, 8)}...`);
+    
+    // Check if we have a previous hash
+    const previousHash = getPreviousHash();
+    
+    if (previousHash === currentHash && !forceRebuild) {
+      console.log('Sheet data unchanged - skipping rebuild');
+      console.log('Use --force or -f flag to force a rebuild');
+      return;
+    }
+    
+    if (forceRebuild) {
+      console.log('Force rebuild requested - proceeding regardless of hash');
+    } else {
+      console.log('Sheet data has changed - proceeding with rebuild');
+    }
+    
     // Parse CSV to JSON
     const jsonData = csvToJson(csvData);
     
@@ -50,6 +74,10 @@ async function fetchOfficersData() {
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(processedData, null, 2));
     console.log(`Officers data saved to ${OUTPUT_FILE}`);
     console.log(`Found ${processedData.length} officers`);
+    
+    // Save the new hash
+    saveCurrentHash(currentHash);
+    console.log('Hash tracking file updated');
     
   } catch (error) {
     console.error('Error fetching officers data:', error);
@@ -210,6 +238,25 @@ function parseCSVRow(row) {
   
   result.push(current); // Add the last field
   return result;
+}
+
+function getPreviousHash() {
+  try {
+    if (fs.existsSync(HASH_TRACKING_FILE)) {
+      return fs.readFileSync(HASH_TRACKING_FILE, 'utf8').trim();
+    }
+  } catch (error) {
+    console.warn('Could not read hash tracking file:', error.message);
+  }
+  return null;
+}
+
+function saveCurrentHash(hash) {
+  try {
+    fs.writeFileSync(HASH_TRACKING_FILE, hash);
+  } catch (error) {
+    console.warn('Could not save hash to tracking file:', error.message);
+  }
 }
 
 // Run the script
