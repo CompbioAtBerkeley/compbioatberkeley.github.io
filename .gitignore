@@ -31,3 +31,6 @@ dist-ssr
 #vite module
 my-vite-app/*
 
+# environment variables
+.env
+.env.*
