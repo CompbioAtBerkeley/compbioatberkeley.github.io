@@ -24,9 +24,9 @@ const logger = pino({
 });
 
 // Image compression settings
-const COMPRESSION_THRESHOLD = 100 * 1024; // 100KB in bytes
-const COMPRESSION_QUALITY = 80; // JPEG quality (1-100)
-const MAX_WIDTH = 1200; // Maximum width for compressed images
+const COMPRESSION_THRESHOLD = 50 * 1024; // 50KB in bytes
+const COMPRESSION_QUALITY = 50; // JPEG quality (1-100)
+const MAX_WIDTH = 600; // Maximum width for compressed images
 
 // Command line arguments
 const args = process.argv.slice(2);
