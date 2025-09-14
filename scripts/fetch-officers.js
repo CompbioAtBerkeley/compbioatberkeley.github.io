@@ -167,7 +167,6 @@ function csvToJson(csvData) {
   
   // Parse header row
   const headers = parseCSVRow(lines[0]);
-  console.log('CSV Headers:', headers);
   
   // Parse data rows
   const data = [];
