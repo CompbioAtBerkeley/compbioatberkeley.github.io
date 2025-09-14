@@ -4,9 +4,29 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
+import pino from 'pino';
+import sharp from 'sharp';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Initialize logger
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true,
+      ignore: 'pid,hostname',
+      translateTime: 'SYS:standard'
+    }
+  }
+});
+
+// Image compression settings
+const COMPRESSION_THRESHOLD = 100 * 1024; // 100KB in bytes
+const COMPRESSION_QUALITY = 80; // JPEG quality (1-100)
+const MAX_WIDTH = 1200; // Maximum width for compressed images
 
 // Command line arguments
 const args = process.argv.slice(2);
@@ -22,14 +42,11 @@ const OUTPUT_FILE = path.join(OUTPUT_DIR, 'officers.json');
 const IMAGES_DIR = OUTPUT_DIR;
 const HASH_TRACKING_FILE = path.join(OUTPUT_DIR, '.sheet-hash');
 
-// Ensure images directory exists
-if (!fs.existsSync(IMAGES_DIR)) {
-  fs.mkdirSync(IMAGES_DIR, { recursive: true });
-}
-
 async function fetchOfficersData() {
+  const startTime = Date.now();
+  
   try {
-    console.log('Fetching officers data from Google Sheets...');
+    logger.info({ forceRebuild }, 'Starting officers data fetch');
     
     const response = await fetch(CSV_URL);
     if (!response.ok) {
@@ -37,78 +54,155 @@ async function fetchOfficersData() {
     }
     
     const csvData = await response.text();
-    console.log('CSV data fetched successfully');
+    logger.info({ dataSize: csvData.length }, 'CSV data fetched successfully');
     
     // Create hash of the CSV data
     const currentHash = crypto.createHash('sha256').update(csvData).digest('hex');
-    console.log(`Current sheet hash: ${currentHash.slice(0, 8)}...`);
+    logger.info({ hash: currentHash.slice(0, 8) }, 'Current sheet hash calculated');
     
     // Check if we have a previous hash
     const previousHash = getPreviousHash();
     
     if (previousHash === currentHash && !forceRebuild) {
-      console.log('Sheet data unchanged - skipping rebuild');
-      console.log('Use --force or -f flag to force a rebuild');
+      logger.info('Sheet data unchanged - skipping rebuild');
+      logger.info('Use --force or -f flag to force a rebuild');
       return;
     }
     
     if (forceRebuild) {
-      console.log('Force rebuild requested - proceeding regardless of hash');
+      logger.info('Force rebuild requested - proceeding regardless of hash');
     } else {
-      console.log('Sheet data has changed - proceeding with rebuild');
+      logger.info('Sheet data has changed - proceeding with rebuild');
     }
+    
+    // Delete the entire fetched/officers directory if it exists before re-pulling
+    if (fs.existsSync(OUTPUT_DIR)) {
+      logger.info('Deleting existing officers directory for clean rebuild');
+      fs.rmSync(OUTPUT_DIR, { recursive: true, force: true });
+    }
+    
+    // Recreate the output directory
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    logger.info('Officers directory recreated');
     
     // Parse CSV to JSON
     const jsonData = csvToJson(csvData);
     
     // Download images and update image URLs
-    console.log('Processing officer images...');
+    logger.info('Processing officer images...');
     const processedData = await processOfficerImages(jsonData);
-    
-    // Ensure output directory exists
-    if (!fs.existsSync(OUTPUT_DIR)) {
-      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-    }
     
     // Write JSON file
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(processedData, null, 2));
-    console.log(`Officers data saved to ${OUTPUT_FILE}`);
-    console.log(`Found ${processedData.length} officers`);
+    logger.info({ file: OUTPUT_FILE }, 'Officers data saved');
+    logger.info({ count: processedData.length }, 'Officers processed');
     
     // Save the new hash
     saveCurrentHash(currentHash);
-    console.log('Hash tracking file updated');
+    logger.info('Hash tracking file updated');
+    
+    const duration = Date.now() - startTime;
+    logger.info({ duration, officers: processedData.length }, 'Officers data fetch completed successfully');
     
   } catch (error) {
-    console.error('Error fetching officers data:', error);
+    const duration = Date.now() - startTime;
+    logger.error({ error: error.message, duration }, 'Error fetching officers data');
     process.exit(1);
   }
 }
 
 async function processOfficerImages(officers) {
   const processedOfficers = [];
+  const imageStartTime = Date.now();
+  let successCount = 0;
+  let failureCount = 0;
+  
+  logger.info({ total: officers.length }, 'Starting image processing');
   
   for (const officer of officers) {
     const processedOfficer = { ...officer };
     
     if (officer.image && officer.image.trim() !== '') {
       try {
-        console.log(`Downloading image for ${officer.name}...`);
+        logger.debug({ officer: officer.name }, 'Downloading image');
         const extension = officer['image extension'] || '.jpg'; // Default to .jpg if no extension provided
         const localImagePath = await downloadImage(officer.image, officer.name, extension);
         processedOfficer.image = localImagePath;
-        console.log(`✓ Image downloaded for ${officer.name}: ${localImagePath}`);
+        logger.info({ officer: officer.name, path: localImagePath }, 'Image downloaded successfully');
+        successCount++;
       } catch (error) {
-        console.warn(`⚠ Failed to download image for ${officer.name}:`, error.message);
+        logger.warn({ officer: officer.name, error: error.message }, 'Failed to download image');
         // Keep the original URL if download fails
         processedOfficer.image = officer.image;
+        failureCount++;
       }
     }
     
     processedOfficers.push(processedOfficer);
   }
   
+  const imageDuration = Date.now() - imageStartTime;
+  logger.info({ 
+    duration: imageDuration,
+    successCount,
+    failureCount,
+    total: officers.length
+  }, 'Image processing completed');
+  
   return processedOfficers;
+}
+
+async function compressImageIfNeeded(buffer, filename, originalSize) {
+  if (originalSize <= COMPRESSION_THRESHOLD) {
+    logger.debug({ filename, size: originalSize }, 'Image under threshold, skipping compression');
+    return buffer;
+  }
+
+  try {
+    logger.info({ filename, originalSize, threshold: COMPRESSION_THRESHOLD }, 'Compressing image');
+    
+    // Get file extension to determine format
+    const ext = path.extname(filename).toLowerCase();
+    
+    let compressedBuffer;
+    
+    if (ext === '.png') {
+      // For PNG files, convert to WebP for better compression
+      compressedBuffer = await sharp(buffer)
+        .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+        .webp({ quality: COMPRESSION_QUALITY })
+        .toBuffer();
+    } else if (ext === '.jpg' || ext === '.jpeg') {
+      // For JPEG files, compress as JPEG
+      compressedBuffer = await sharp(buffer)
+        .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+        .jpeg({ quality: COMPRESSION_QUALITY })
+        .toBuffer();
+    } else {
+      // For other formats, try to convert to JPEG
+      compressedBuffer = await sharp(buffer)
+        .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+        .jpeg({ quality: COMPRESSION_QUALITY })
+        .toBuffer();
+    }
+    
+    const compressedSize = compressedBuffer.length;
+    const compressionRatio = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
+    
+    logger.info({ 
+      filename, 
+      originalSize, 
+      compressedSize, 
+      compressionRatio: `${compressionRatio}%`,
+      saved: originalSize - compressedSize
+    }, 'Image compressed successfully');
+    
+    return compressedBuffer;
+    
+  } catch (error) {
+    logger.warn({ filename, error: error.message }, 'Failed to compress image, using original');
+    return buffer;
+  }
 }
 
 async function downloadImage(imageUrl, officerName, extension) {
@@ -121,20 +215,44 @@ async function downloadImage(imageUrl, officerName, extension) {
     const buffer = await response.arrayBuffer();
     const uint8Array = new Uint8Array(buffer);
     const nodeBuffer = Buffer.from(uint8Array);
+    const originalSize = nodeBuffer.length;
     
     // Use the extension from the Google Sheet
-    const fileExtension = extension.startsWith('.') ? extension : `.${extension}`;
+    let fileExtension = extension.startsWith('.') ? extension : `.${extension}`;
   
     // Create a safe filename using officer name and a hash for uniqueness
     const safeOfficerName = officerName.toLowerCase().replace(/[^a-z0-9]/g, '_');
     // Use a hash of the officer name and image URL to ensure uniqueness
     const hash = crypto.createHash('sha256').update(officerName + imageUrl).digest('hex').slice(0, 8);
-    const filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    let filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    
+    // Compress the image if it's over the threshold
+    const processedBuffer = await compressImageIfNeeded(nodeBuffer, filename, originalSize);
+    
+    // If we compressed a PNG to WebP, update the filename extension
+    if (fileExtension === '.png' && originalSize > COMPRESSION_THRESHOLD) {
+      fileExtension = '.webp';
+      filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    }
+    
+    // If we compressed a non-JPEG to JPEG, update the filename extension
+    if (!fileExtension.match(/\.(jpg|jpeg)$/i) && fileExtension !== '.webp' && originalSize > COMPRESSION_THRESHOLD) {
+      fileExtension = '.jpg';
+      filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    }
     
     const imagePath = path.join(IMAGES_DIR, filename);
     
-    // Write the image file using the node buffer
-    fs.writeFileSync(imagePath, nodeBuffer);
+    // Write the processed image file
+    fs.writeFileSync(imagePath, processedBuffer);
+    
+    logger.info({ 
+      officer: officerName, 
+      filename, 
+      originalSize, 
+      finalSize: processedBuffer.length,
+      compressed: originalSize > COMPRESSION_THRESHOLD
+    }, 'Image saved');
     
     // Return the public path (relative to public directory)
     return `/fetched/officers/${filename}`;
@@ -144,30 +262,16 @@ async function downloadImage(imageUrl, officerName, extension) {
   }
 }
 
-function getExtensionFromContentType(contentType) {
-  const typeMap = {
-    'image/jpeg': '.jpg',
-    'image/jpg': '.jpg',
-    'image/png': '.png',
-    'image/gif': '.gif',
-    'image/webp': '.webp',
-    'image/svg+xml': '.svg',
-    'image/bmp': '.bmp'
-  };
-  
-  return typeMap[contentType.toLowerCase()] || '.jpg';
-}
-
 function csvToJson(csvData) {
   const lines = csvData.trim().split('\n');
   if (lines.length < 2) {
-    console.warn('CSV appears to be empty or has no data rows');
+    logger.warn('CSV appears to be empty or has no data rows');
     return [];
   }
   
   // Parse header row
   const headers = parseCSVRow(lines[0]);
-  console.log('CSV Headers:', headers);
+  logger.debug({ headers }, 'CSV headers parsed');
   
   // Parse data rows
   const data = [];
@@ -190,6 +294,7 @@ function csvToJson(csvData) {
     }
   }
   
+  logger.info({ rows: data.length }, 'CSV data parsed to JSON');
   return data;
 }
 
@@ -208,7 +313,7 @@ function transformGoogleDriveUrl(url) {
   }
   
   // If we can't extract the file ID, return the original URL
-  console.warn(`Could not extract file ID from URL: ${url}`);
+  logger.warn({ url }, 'Could not extract file ID from URL');
   return url;
 }
 
@@ -243,10 +348,12 @@ function parseCSVRow(row) {
 function getPreviousHash() {
   try {
     if (fs.existsSync(HASH_TRACKING_FILE)) {
-      return fs.readFileSync(HASH_TRACKING_FILE, 'utf8').trim();
+      const hash = fs.readFileSync(HASH_TRACKING_FILE, 'utf8').trim();
+      logger.debug({ hash: hash.slice(0, 8) }, 'Previous hash loaded');
+      return hash;
     }
   } catch (error) {
-    console.warn('Could not read hash tracking file:', error.message);
+    logger.warn({ error: error.message }, 'Could not read hash tracking file');
   }
   return null;
 }
@@ -254,8 +361,9 @@ function getPreviousHash() {
 function saveCurrentHash(hash) {
   try {
     fs.writeFileSync(HASH_TRACKING_FILE, hash);
+    logger.debug({ hash: hash.slice(0, 8) }, 'Hash saved to tracking file');
   } catch (error) {
-    console.warn('Could not save hash to tracking file:', error.message);
+    logger.warn({ error: error.message }, 'Could not save hash to tracking file');
   }
 }
 
