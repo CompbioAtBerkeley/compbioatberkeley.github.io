@@ -4,9 +4,23 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
+import pino from 'pino';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Initialize logger
+const logger = pino({
+  level: process.env.LOG_LEVEL || 'info',
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true,
+      ignore: 'pid,hostname',
+      translateTime: 'SYS:standard'
+    }
+  }
+});
 
 // Command line arguments
 const args = process.argv.slice(2);
@@ -28,8 +42,10 @@ if (!fs.existsSync(IMAGES_DIR)) {
 }
 
 async function fetchOfficersData() {
+  const startTime = Date.now();
+  
   try {
-    console.log('Fetching officers data from Google Sheets...');
+    logger.info({ forceRebuild }, 'Starting officers data fetch');
     
     const response = await fetch(CSV_URL);
     if (!response.ok) {
@@ -37,32 +53,32 @@ async function fetchOfficersData() {
     }
     
     const csvData = await response.text();
-    console.log('CSV data fetched successfully');
+    logger.info({ dataSize: csvData.length }, 'CSV data fetched successfully');
     
     // Create hash of the CSV data
     const currentHash = crypto.createHash('sha256').update(csvData).digest('hex');
-    console.log(`Current sheet hash: ${currentHash.slice(0, 8)}...`);
+    logger.info({ hash: currentHash.slice(0, 8) }, 'Current sheet hash calculated');
     
     // Check if we have a previous hash
     const previousHash = getPreviousHash();
     
     if (previousHash === currentHash && !forceRebuild) {
-      console.log('Sheet data unchanged - skipping rebuild');
-      console.log('Use --force or -f flag to force a rebuild');
+      logger.info('Sheet data unchanged - skipping rebuild');
+      logger.info('Use --force or -f flag to force a rebuild');
       return;
     }
     
     if (forceRebuild) {
-      console.log('Force rebuild requested - proceeding regardless of hash');
+      logger.info('Force rebuild requested - proceeding regardless of hash');
     } else {
-      console.log('Sheet data has changed - proceeding with rebuild');
+      logger.info('Sheet data has changed - proceeding with rebuild');
     }
     
     // Parse CSV to JSON
     const jsonData = csvToJson(csvData);
     
     // Download images and update image URLs
-    console.log('Processing officer images...');
+    logger.info('Processing officer images...');
     const processedData = await processOfficerImages(jsonData);
     
     // Ensure output directory exists
@@ -72,41 +88,60 @@ async function fetchOfficersData() {
     
     // Write JSON file
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(processedData, null, 2));
-    console.log(`Officers data saved to ${OUTPUT_FILE}`);
-    console.log(`Found ${processedData.length} officers`);
+    logger.info({ file: OUTPUT_FILE }, 'Officers data saved');
+    logger.info({ count: processedData.length }, 'Officers processed');
     
     // Save the new hash
     saveCurrentHash(currentHash);
-    console.log('Hash tracking file updated');
+    logger.info('Hash tracking file updated');
+    
+    const duration = Date.now() - startTime;
+    logger.info({ duration, officers: processedData.length }, 'Officers data fetch completed successfully');
     
   } catch (error) {
-    console.error('Error fetching officers data:', error);
+    const duration = Date.now() - startTime;
+    logger.error({ error: error.message, duration }, 'Error fetching officers data');
     process.exit(1);
   }
 }
 
 async function processOfficerImages(officers) {
   const processedOfficers = [];
+  const imageStartTime = Date.now();
+  let successCount = 0;
+  let failureCount = 0;
+  
+  logger.info({ total: officers.length }, 'Starting image processing');
   
   for (const officer of officers) {
     const processedOfficer = { ...officer };
     
     if (officer.image && officer.image.trim() !== '') {
       try {
-        console.log(`Downloading image for ${officer.name}...`);
+        logger.debug({ officer: officer.name }, 'Downloading image');
         const extension = officer['image extension'] || '.jpg'; // Default to .jpg if no extension provided
         const localImagePath = await downloadImage(officer.image, officer.name, extension);
         processedOfficer.image = localImagePath;
-        console.log(`✓ Image downloaded for ${officer.name}: ${localImagePath}`);
+        logger.info({ officer: officer.name, path: localImagePath }, 'Image downloaded successfully');
+        successCount++;
       } catch (error) {
-        console.warn(`⚠ Failed to download image for ${officer.name}:`, error.message);
+        logger.warn({ officer: officer.name, error: error.message }, 'Failed to download image');
         // Keep the original URL if download fails
         processedOfficer.image = officer.image;
+        failureCount++;
       }
     }
     
     processedOfficers.push(processedOfficer);
   }
+  
+  const imageDuration = Date.now() - imageStartTime;
+  logger.info({ 
+    duration: imageDuration,
+    successCount,
+    failureCount,
+    total: officers.length
+  }, 'Image processing completed');
   
   return processedOfficers;
 }
@@ -161,12 +196,13 @@ function getExtensionFromContentType(contentType) {
 function csvToJson(csvData) {
   const lines = csvData.trim().split('\n');
   if (lines.length < 2) {
-    console.warn('CSV appears to be empty or has no data rows');
+    logger.warn('CSV appears to be empty or has no data rows');
     return [];
   }
   
   // Parse header row
   const headers = parseCSVRow(lines[0]);
+  logger.debug({ headers }, 'CSV headers parsed');
   
   // Parse data rows
   const data = [];
@@ -189,6 +225,7 @@ function csvToJson(csvData) {
     }
   }
   
+  logger.info({ rows: data.length }, 'CSV data parsed to JSON');
   return data;
 }
 
@@ -207,7 +244,7 @@ function transformGoogleDriveUrl(url) {
   }
   
   // If we can't extract the file ID, return the original URL
-  console.warn(`Could not extract file ID from URL: ${url}`);
+  logger.warn({ url }, 'Could not extract file ID from URL');
   return url;
 }
 
@@ -242,10 +279,12 @@ function parseCSVRow(row) {
 function getPreviousHash() {
   try {
     if (fs.existsSync(HASH_TRACKING_FILE)) {
-      return fs.readFileSync(HASH_TRACKING_FILE, 'utf8').trim();
+      const hash = fs.readFileSync(HASH_TRACKING_FILE, 'utf8').trim();
+      logger.debug({ hash: hash.slice(0, 8) }, 'Previous hash loaded');
+      return hash;
     }
   } catch (error) {
-    console.warn('Could not read hash tracking file:', error.message);
+    logger.warn({ error: error.message }, 'Could not read hash tracking file');
   }
   return null;
 }
@@ -253,8 +292,9 @@ function getPreviousHash() {
 function saveCurrentHash(hash) {
   try {
     fs.writeFileSync(HASH_TRACKING_FILE, hash);
+    logger.debug({ hash: hash.slice(0, 8) }, 'Hash saved to tracking file');
   } catch (error) {
-    console.warn('Could not save hash to tracking file:', error.message);
+    logger.warn({ error: error.message }, 'Could not save hash to tracking file');
   }
 }
 
