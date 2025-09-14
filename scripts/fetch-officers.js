@@ -36,11 +36,6 @@ const OUTPUT_FILE = path.join(OUTPUT_DIR, 'officers.json');
 const IMAGES_DIR = OUTPUT_DIR;
 const HASH_TRACKING_FILE = path.join(OUTPUT_DIR, '.sheet-hash');
 
-// Ensure images directory exists
-if (!fs.existsSync(IMAGES_DIR)) {
-  fs.mkdirSync(IMAGES_DIR, { recursive: true });
-}
-
 async function fetchOfficersData() {
   const startTime = Date.now();
   
@@ -74,17 +69,22 @@ async function fetchOfficersData() {
       logger.info('Sheet data has changed - proceeding with rebuild');
     }
     
+    // Delete the entire fetched/officers directory if it exists before re-pulling
+    if (fs.existsSync(OUTPUT_DIR)) {
+      logger.info('Deleting existing officers directory for clean rebuild');
+      fs.rmSync(OUTPUT_DIR, { recursive: true, force: true });
+    }
+    
+    // Recreate the output directory
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    logger.info('Officers directory recreated');
+    
     // Parse CSV to JSON
     const jsonData = csvToJson(csvData);
     
     // Download images and update image URLs
     logger.info('Processing officer images...');
     const processedData = await processOfficerImages(jsonData);
-    
-    // Ensure output directory exists
-    if (!fs.existsSync(OUTPUT_DIR)) {
-      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-    }
     
     // Write JSON file
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(processedData, null, 2));
