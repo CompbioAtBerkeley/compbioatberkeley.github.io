@@ -8,7 +8,7 @@
     "prebuild": "npm run fetch-data",
     "build": "vite build",
     "build:dev": "vite build --mode development",
-    "fetch-data": "node scripts/fetch-officers.js",
+    "fetch-data": "rm -rf public/fetched && node scripts/fetch-officers.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

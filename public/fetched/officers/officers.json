@@ -5,7 +5,7 @@
     "image": "",
     "image extension": "",
     "personal website": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/saket-budhia/",
     "github": "",
     "orcid": ""
   },
@@ -22,20 +22,20 @@
   {
     "name": "Marsiah",
     "role": "External Vice President",
-    "image": "",
-    "image extension": "",
+    "image": "/fetched/officers/marsiah_5d65b486.jpg",
+    "image extension": "jpg",
     "personal website": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/marsiah-leblanc-671930250/",
     "github": "",
     "orcid": ""
   },
   {
     "name": "Anisha",
     "role": "Internal Vice President",
-    "image": "",
-    "image extension": "",
+    "image": "/fetched/officers/anisha_1d1e4ab4.png",
+    "image extension": "png",
     "personal website": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/anishapallikonda/",
     "github": "",
     "orcid": ""
   },
@@ -55,7 +55,7 @@
     "image": "",
     "image extension": "",
     "personal website": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/priyam-baruah-539264221/",
     "github": "",
     "orcid": ""
   },
@@ -65,44 +65,44 @@
     "image": "",
     "image extension": "",
     "personal website": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/sai-rithvik-kotla/",
     "github": "",
     "orcid": ""
   },
   {
-    "name": "Kai",
+    "name": "Kai Emerling",
     "role": "Project Lead",
-    "image": "",
-    "image extension": "",
-    "personal website": "",
-    "linkedin": "",
-    "github": "",
-    "orcid": ""
-  },
-  {
-    "name": "Saadhvi",
-    "role": "Academic & Professional Development Co-Lead",
-    "image": "",
-    "image extension": "",
-    "personal website": "",
-    "linkedin": "",
-    "github": "",
-    "orcid": ""
-  },
-  {
-    "name": "Lila",
-    "role": "Academic & Professional Development Co-Lead",
-    "image": "/fetched/officers/lila_c2bc32bc.jpg",
+    "image": "/fetched/officers/kai_emerling_eeddb1c5.jpg",
     "image extension": "jpg",
     "personal website": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/kai-emerling-21670a312/",
     "github": "",
     "orcid": ""
   },
   {
-    "name": "Qile",
-    "role": "Web Developer",
-    "image": "/fetched/officers/qile_b29d821a.jpg",
+    "name": "Saadhvi Narayanan",
+    "role": "Academic & Professional Development Co-Lead",
+    "image": "/fetched/officers/saadhvi_narayanan_63c9f1cd.jpg",
+    "image extension": "",
+    "personal website": "",
+    "linkedin": "https://www.linkedin.com/in/nsaadhvi/",
+    "github": "",
+    "orcid": ""
+  },
+  {
+    "name": "Lila Wijaya",
+    "role": "Academic & Professional Development Co-Lead",
+    "image": "/fetched/officers/lila_wijaya_bb8a116a.jpg",
+    "image extension": "jpg",
+    "personal website": "",
+    "linkedin": "https://www.linkedin.com/in/lilawijaya/",
+    "github": "",
+    "orcid": ""
+  },
+  {
+    "name": "Qile Yang",
+    "role": "Operations & Tech Lead",
+    "image": "/fetched/officers/qile_yang_0f0ad430.jpg",
     "image extension": "jpg",
     "personal website": "https://qile0317.github.io/",
     "linkedin": "https://www.linkedin.com/in/qile0317",
@@ -110,12 +110,12 @@
     "orcid": "https://orcid.org/0009-0005-0148-2499"
   },
   {
-    "name": "Hansen",
+    "name": "Hansen Wen",
     "role": "Historian & Project Lead",
-    "image": "",
-    "image extension": "",
+    "image": "/fetched/officers/hansen_wen_4fd88ff5.jpg",
+    "image extension": "jpg",
     "personal website": "",
-    "linkedin": "",
+    "linkedin": "https://www.linkedin.com/in/hanson-wen/",
     "github": "",
     "orcid": ""
   }
