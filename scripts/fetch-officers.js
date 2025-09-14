@@ -5,6 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
 import pino from 'pino';
+import sharp from 'sharp';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,6 +22,11 @@ const logger = pino({
     }
   }
 });
+
+// Image compression settings
+const COMPRESSION_THRESHOLD = 100 * 1024; // 100KB in bytes
+const COMPRESSION_QUALITY = 80; // JPEG quality (1-100)
+const MAX_WIDTH = 1200; // Maximum width for compressed images
 
 // Command line arguments
 const args = process.argv.slice(2);
@@ -146,6 +152,59 @@ async function processOfficerImages(officers) {
   return processedOfficers;
 }
 
+async function compressImageIfNeeded(buffer, filename, originalSize) {
+  if (originalSize <= COMPRESSION_THRESHOLD) {
+    logger.debug({ filename, size: originalSize }, 'Image under threshold, skipping compression');
+    return buffer;
+  }
+
+  try {
+    logger.info({ filename, originalSize, threshold: COMPRESSION_THRESHOLD }, 'Compressing image');
+    
+    // Get file extension to determine format
+    const ext = path.extname(filename).toLowerCase();
+    
+    let compressedBuffer;
+    
+    if (ext === '.png') {
+      // For PNG files, convert to WebP for better compression
+      compressedBuffer = await sharp(buffer)
+        .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+        .webp({ quality: COMPRESSION_QUALITY })
+        .toBuffer();
+    } else if (ext === '.jpg' || ext === '.jpeg') {
+      // For JPEG files, compress as JPEG
+      compressedBuffer = await sharp(buffer)
+        .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+        .jpeg({ quality: COMPRESSION_QUALITY })
+        .toBuffer();
+    } else {
+      // For other formats, try to convert to JPEG
+      compressedBuffer = await sharp(buffer)
+        .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+        .jpeg({ quality: COMPRESSION_QUALITY })
+        .toBuffer();
+    }
+    
+    const compressedSize = compressedBuffer.length;
+    const compressionRatio = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
+    
+    logger.info({ 
+      filename, 
+      originalSize, 
+      compressedSize, 
+      compressionRatio: `${compressionRatio}%`,
+      saved: originalSize - compressedSize
+    }, 'Image compressed successfully');
+    
+    return compressedBuffer;
+    
+  } catch (error) {
+    logger.warn({ filename, error: error.message }, 'Failed to compress image, using original');
+    return buffer;
+  }
+}
+
 async function downloadImage(imageUrl, officerName, extension) {
   try {
     const response = await fetch(imageUrl);
@@ -156,20 +215,44 @@ async function downloadImage(imageUrl, officerName, extension) {
     const buffer = await response.arrayBuffer();
     const uint8Array = new Uint8Array(buffer);
     const nodeBuffer = Buffer.from(uint8Array);
+    const originalSize = nodeBuffer.length;
     
     // Use the extension from the Google Sheet
-    const fileExtension = extension.startsWith('.') ? extension : `.${extension}`;
+    let fileExtension = extension.startsWith('.') ? extension : `.${extension}`;
   
     // Create a safe filename using officer name and a hash for uniqueness
     const safeOfficerName = officerName.toLowerCase().replace(/[^a-z0-9]/g, '_');
     // Use a hash of the officer name and image URL to ensure uniqueness
     const hash = crypto.createHash('sha256').update(officerName + imageUrl).digest('hex').slice(0, 8);
-    const filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    let filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    
+    // Compress the image if it's over the threshold
+    const processedBuffer = await compressImageIfNeeded(nodeBuffer, filename, originalSize);
+    
+    // If we compressed a PNG to WebP, update the filename extension
+    if (fileExtension === '.png' && originalSize > COMPRESSION_THRESHOLD) {
+      fileExtension = '.webp';
+      filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    }
+    
+    // If we compressed a non-JPEG to JPEG, update the filename extension
+    if (!fileExtension.match(/\.(jpg|jpeg)$/i) && fileExtension !== '.webp' && originalSize > COMPRESSION_THRESHOLD) {
+      fileExtension = '.jpg';
+      filename = `${safeOfficerName}_${hash}${fileExtension}`;
+    }
     
     const imagePath = path.join(IMAGES_DIR, filename);
     
-    // Write the image file using the node buffer
-    fs.writeFileSync(imagePath, nodeBuffer);
+    // Write the processed image file
+    fs.writeFileSync(imagePath, processedBuffer);
+    
+    logger.info({ 
+      officer: officerName, 
+      filename, 
+      originalSize, 
+      finalSize: processedBuffer.length,
+      compressed: originalSize > COMPRESSION_THRESHOLD
+    }, 'Image saved');
     
     // Return the public path (relative to public directory)
     return `/fetched/officers/${filename}`;
@@ -177,20 +260,6 @@ async function downloadImage(imageUrl, officerName, extension) {
   } catch (error) {
     throw new Error(`Failed to download image: ${error.message}`);
   }
-}
-
-function getExtensionFromContentType(contentType) {
-  const typeMap = {
-    'image/jpeg': '.jpg',
-    'image/jpg': '.jpg',
-    'image/png': '.png',
-    'image/gif': '.gif',
-    'image/webp': '.webp',
-    'image/svg+xml': '.svg',
-    'image/bmp': '.bmp'
-  };
-  
-  return typeMap[contentType.toLowerCase()] || '.jpg';
 }
 
 function csvToJson(csvData) {
