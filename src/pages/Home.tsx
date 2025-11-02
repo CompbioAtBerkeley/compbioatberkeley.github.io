@@ -34,7 +34,7 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a 
-              href="https://forms.gle/nrsXrPFKA8CRn9P66" 
+              href="https://forms.gle/rD4XLxwZkxusCx5w5" 
               target="_blank" 
               rel="noopener noreferrer"
             >

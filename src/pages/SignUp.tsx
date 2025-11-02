@@ -5,7 +5,7 @@ import { ExternalLink } from "lucide-react";
 const SignUp = () => {
   return (
     <div className="min-h-screen py-16 px-4 bg-gradient-to-br from-bio-green/5 to-compute-blue/5">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-bio bg-clip-text text-transparent">
             Join Our Community
@@ -15,7 +15,7 @@ const SignUp = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Sign Up Form */}
           <Card className="border-bio-green/20 hover:shadow-bio transition-all duration-300">
             <CardHeader>
@@ -26,7 +26,7 @@ const SignUp = () => {
                 Sign up for our newsletter to receive updates about events, courses, and opportunities.
               </p>
               <iframe 
-                src="https://forms.gle/bj6YNehfFS5Ytd8N6"
+                src="https://forms.gle/rD4XLxwZkxusCx5w5"
                 width="100%" 
                 height="400"
                 className="rounded-lg border border-bio-green/20"
@@ -36,7 +36,40 @@ const SignUp = () => {
               </iframe>
               <div className="mt-4">
                 <a 
-                  href="https://forms.gle/bj6YNehfFS5Ytd8N6" 
+                  href="https://forms.gle/rD4XLxwZkxusCx5w5" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <EnhancedButton variant="bio-solid" size="lg">
+                    Open Form in New Tab
+                    <ExternalLink className="w-4 h-4" />
+                  </EnhancedButton>
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Newsletter Form */}
+          <Card className="border-bio-green/20 hover:shadow-bio transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="text-2xl text-bio-green text-center">Newsletter</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-muted-foreground mb-6">
+                Subscribe to our newsletter for in-depth articles and exclusive content.
+              </p>
+              <iframe 
+                src="https://forms.gle/qCxn93mfunF3Dtep7"
+                width="100%" 
+                height="400"
+                className="rounded-lg border border-bio-green/20"
+                title="Newsletter Form"
+              >
+                Loading...
+              </iframe>
+              <div className="mt-4">
+                <a 
+                  href="https://forms.gle/qCxn93mfunF3Dtep7" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
@@ -50,15 +83,15 @@ const SignUp = () => {
           </Card>
 
           {/* Social Links */}
-          <Card className="border-compute-blue/20 hover:shadow-compute transition-all duration-300">
+          <Card className="border-compute-blue/20 hover:shadow-compute transition-all duration-300 flex flex-col">
             <CardHeader>
               <CardTitle className="text-2xl text-compute-blue text-center">Connect With Us</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="text-center">
+            <CardContent className="flex-1 flex flex-col justify-center items-center space-y-6">
+              <div className="text-center w-full">
                 <h3 className="text-lg font-semibold mb-4">Follow us on social media</h3>
                 
-                <div className="space-y-4">
+                <div className="space-y-4 max-w-xs mx-auto">
                   
                   
                   <EnhancedButton variant="bio-outline" size="lg" className="w-full">
@@ -73,7 +106,7 @@ const SignUp = () => {
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-border">
+              <div className="pt-6 border-t border-border w-full max-w-xs">
                 <p className="text-sm text-muted-foreground text-center">
                   Questions? Reach out to us through any of these platforms, and we'll get back to you soon!
                 </p>
