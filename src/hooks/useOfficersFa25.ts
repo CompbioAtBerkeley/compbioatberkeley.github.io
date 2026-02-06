@@ -20,7 +20,9 @@ export const useOfficersFa25 = () => {
         }
         
         const data = await response.json();
-        setOfficers(data);
+        // Sort officers alphabetically by name
+        const sortedData = [...data].sort((a, b) => a.name.localeCompare(b.name));
+        setOfficers(sortedData);
       } catch (err) {
         console.error('Error fetching FA25 officers:', err);
         setError(err instanceof Error ? err.message : 'Failed to fetch FA25 officers data');

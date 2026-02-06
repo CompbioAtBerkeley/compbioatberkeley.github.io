@@ -7,8 +7,41 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const Officers = () => {
-  // const { officers, loading, error } = useOfficers(); // TODO: Replace with Notion fetch for SP26+
+  const { officers, loading, error } = useOfficers(); // Current officers from Notion (SP26+)
   const { officers: officersFa25, loading: loadingFa25, error: errorFa25 } = useOfficersFa25();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen py-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-bio bg-clip-text text-transparent">
+            Our Leadership Team
+          </h1>
+          <div className="flex items-center justify-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-bio-green"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen py-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-bio bg-clip-text text-transparent">
+            Our Leadership Team
+          </h1>
+          <Alert className="max-w-2xl mx-auto">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              Unable to load officers data. Please try again later.
+            </AlertDescription>
+          </Alert>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen py-16 px-4">
@@ -22,13 +55,14 @@ const Officers = () => {
           </p>
         </div>
         
-        {/* Current semester officers (Spring 2026) - to be implemented with Notion */}
-        <Alert className="max-w-2xl mx-auto mb-12">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            Spring 2026 officer roster coming soon! Check out our Fall 2025 team below.
-          </AlertDescription>
-        </Alert>
+        {/* Current semester officers */}
+        <div className="flex flex-wrap justify-center gap-6">
+          {officers.map((officer, index) => (
+            <div key={index} className="w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)]">
+              <OfficerCard officer={officer} />
+            </div>
+          ))}
+        </div>
 
         <div className="mt-16 text-center">
           <Card className="border-bio-green/20 max-w-2xl mx-auto">
@@ -78,7 +112,7 @@ const Officers = () => {
                   ) : (
                     <div className="flex flex-wrap justify-center gap-6 pt-4">
                       {officersFa25.map((officer, index) => (
-                        <div key={index} className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                        <div key={index} className="w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.125rem)]">
                           <OfficerCard officer={officer} />
                         </div>
                       ))}
