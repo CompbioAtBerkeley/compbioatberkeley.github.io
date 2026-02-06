@@ -6,4 +6,5 @@ export interface Officer {
   linkedin: string;
   github: string;
   orcid: string;
+  bio?: string;
 }

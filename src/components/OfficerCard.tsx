@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { FaGlobe, FaLinkedin, FaGithub } from "react-icons/fa";
+import { Info } from "lucide-react";
 import { Officer } from "@/types/officers";
 
 interface OfficerCardProps {
@@ -16,6 +18,7 @@ export const OfficerCard = ({ officer }: OfficerCardProps) => {
   const linkedin = officer.linkedin || '';
   const github = officer.github || '';
   const orcid = officer.orcid || '';
+  const bio = officer.bio || '';
 
   // Default placeholder image path
   const defaultImage = '/placeholder.svg';
@@ -57,6 +60,21 @@ export const OfficerCard = ({ officer }: OfficerCardProps) => {
 
           {/* Contact Links */}
           <div className="flex space-x-3 pt-1">
+            {bio && bio.trim() !== '' && (
+              <HoverCard>
+                <HoverCardTrigger asChild>
+                  <button className="text-bio-green hover:text-bio-green/80 transition-colors">
+                    <Info className="w-4 h-4" />
+                  </button>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80">
+                  <div className="space-y-2">
+                    <h4 className="font-semibold text-sm">About {name}</h4>
+                    <p className="text-sm text-muted-foreground">{bio}</p>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            )}
             {personalWebsite && personalWebsite.trim() !== '' && (
               <a
                 href={personalWebsite.startsWith('http') ? personalWebsite : `https://${personalWebsite}`}
