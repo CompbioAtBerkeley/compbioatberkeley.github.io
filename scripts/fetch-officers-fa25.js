@@ -37,8 +37,8 @@ const GOOGLE_SHEET_ID = '1N8vuOaxZoHAhiLSN-WTOkeHmXe9BMQok64w1z4GwC-g'; // TODO 
 const CSV_URL = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=csv`;
 
 // Output paths
-const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'fetched', 'officers');
-const OUTPUT_FILE = path.join(OUTPUT_DIR, 'officers.json');
+const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'fetched', 'officers', 'fa25');
+const OUTPUT_FILE = path.join(OUTPUT_DIR, 'officers-fa25.json');
 const IMAGES_DIR = OUTPUT_DIR;
 const HASH_TRACKING_FILE = path.join(OUTPUT_DIR, '.sheet-hash');
 
@@ -255,7 +255,7 @@ async function downloadImage(imageUrl, officerName, extension) {
     }, 'Image saved');
     
     // Return the public path (relative to public directory)
-    return `/fetched/officers/${filename}`;
+    return `/fetched/officers/fa25/${filename}`;
     
   } catch (error) {
     throw new Error(`Failed to download image: ${error.message}`);
