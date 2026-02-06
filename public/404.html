@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Computational Biology at Berkeley</title>
+  <script>
+    // GitHub Pages SPA redirect hack
+    // This script takes the current URL and converts the path and query
+    // string into a hash that the client-side router can read
+    
+    const pathSegmentsToKeep = 0;
+    const location = window.location;
+    
+    location.replace(
+      location.protocol + '//' + location.host + location.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' + 
+      location.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (location.search ? '&' + location.search.slice(1).replace(/&/g, '~and~') : '') +
+      location.hash
+    );
+  </script>
+</head>
+<body>
+</body>
+</html>

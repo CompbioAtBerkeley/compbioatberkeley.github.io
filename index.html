@@ -6,6 +6,21 @@
     <title>Computational Biology at Berkeley</title>
     <meta name="description" content="A student-driven community exploring the intersection of computer science, biology, and healthcare at UC Berkeley." />
     <meta name="author" content="Computational Biology at Berkeley" />
+    
+    <!-- GitHub Pages SPA redirect handler -->
+    <script>
+      // Redirect from 404.html with the path encoded in the query
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
 
     <meta property="og:title" content="Computational Biology at Berkeley" />
     <meta property="og:description" content="A student-driven community exploring the intersection of computer science, biology, and healthcare at UC Berkeley." />
