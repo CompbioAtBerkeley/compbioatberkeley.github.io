@@ -9,8 +9,6 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "fetch-data": "node scripts/fetch-officers-fa25.js && node scripts/fetch-officers-notion.js",
-    "fetch-fa25": "node scripts/fetch-officers-fa25.js",
-    "fetch-notion": "node scripts/fetch-officers-notion.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
