@@ -38,11 +38,25 @@ const forceRebuild = args.includes('--force') || args.includes('-f');
 const NOTION_API_KEY = process.env.NOTION_API_KEY;
 const NOTION_DATABASE_ID = process.env.NOTION_OFFICERS_DB_ID;
 
-// Output paths
-const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'fetched', 'officers');
-const OUTPUT_FILE = path.join(OUTPUT_DIR, 'officers.json');
-const IMAGES_DIR = OUTPUT_DIR;
-const HASH_TRACKING_FILE = path.join(OUTPUT_DIR, '.notion-hash');
+// Helper function to get current semester based on date
+function getCurrentSemester() {
+  const now = new Date();
+  const month = now.getMonth(); // 0-11
+  const year = now.getFullYear();
+  
+  // Spring: Jan-July (months 0-6), Fall: Aug-Dec (months 7-11)
+  const semester = month <= 6 ? 'sp' : 'fa';
+  const semesterYear = String(year).slice(-2);
+  
+  return `${semester}${semesterYear}`;
+}
+
+// This will be set after we determine the semester
+let SEMESTER = null;
+let OUTPUT_DIR = null;
+let OUTPUT_FILE = null;
+let IMAGES_DIR = null;
+let HASH_TRACKING_FILE = null;
 
 async function fetchOfficersData() {
   const startTime = Date.now();
@@ -70,6 +84,30 @@ async function fetchOfficersData() {
     
     logger.info({ count: response.results.length }, 'Notion pages fetched');
     
+    // Determine semester from the first officer's Semester field or use current semester
+    let detectedSemester = getCurrentSemester();
+    if (response.results.length > 0) {
+      const firstPage = response.results[0];
+      const semesterProp = firstPage.properties['Semester'];
+      if (semesterProp?.rich_text && semesterProp.rich_text.length > 0) {
+        const semesterText = semesterProp.rich_text[0].plain_text.toLowerCase().trim();
+        // Normalize to format like "sp26" or "fa25"
+        detectedSemester = semesterText;
+        logger.info({ semester: detectedSemester }, 'Semester detected from Notion');
+      } else {
+        logger.info({ semester: detectedSemester }, 'No semester in Notion, using current semester');
+      }
+    }
+    
+    // Set semester and initialize output paths
+    SEMESTER = detectedSemester;
+    OUTPUT_DIR = path.join(__dirname, '..', 'public', 'fetched', 'officers', SEMESTER);
+    OUTPUT_FILE = path.join(OUTPUT_DIR, `officers-${SEMESTER}.json`);
+    IMAGES_DIR = OUTPUT_DIR;
+    HASH_TRACKING_FILE = path.join(OUTPUT_DIR, '.notion-hash');
+    
+    logger.info({ semester: SEMESTER, outputDir: OUTPUT_DIR }, 'Output paths configured');
+    
     // Create hash of the response data
     const currentHash = crypto.createHash('sha256')
       .update(JSON.stringify(response.results))
@@ -91,15 +129,15 @@ async function fetchOfficersData() {
       logger.info('Notion data has changed - proceeding with rebuild');
     }
     
-    // Delete the entire fetched/officers directory if it exists before re-pulling
+    // Delete only the semester-specific subdirectory if it exists
     if (fs.existsSync(OUTPUT_DIR)) {
-      logger.info('Deleting existing officers directory for clean rebuild');
+      logger.info({ dir: OUTPUT_DIR }, 'Deleting existing semester officers directory for clean rebuild');
       fs.rmSync(OUTPUT_DIR, { recursive: true, force: true });
     }
     
     // Recreate the output directory
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-    logger.info('Officers directory recreated');
+    logger.info('Semester officers directory recreated');
     
     // Parse Notion pages to JSON
     const jsonData = await parseNotionPages(response.results, notion);
@@ -333,7 +371,7 @@ async function downloadImage(imageUrl, officerName) {
     }, 'Image saved');
     
     // Return the public path (relative to public directory)
-    return `/fetched/officers/${filename}`;
+    return `/fetched/officers/${SEMESTER}/${filename}`;
     
   } catch (error) {
     throw new Error(`Failed to download image: ${error.message}`);

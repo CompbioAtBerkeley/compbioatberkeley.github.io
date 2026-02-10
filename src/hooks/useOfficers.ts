@@ -1,6 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Officer } from '@/types/officers';
 
+// Helper function to get current semester based on date
+function getCurrentSemester(): string {
+  const now = new Date();
+  const month = now.getMonth(); // 0-11
+  const year = now.getFullYear();
+  
+  // Spring: Jan-July (months 0-6), Fall: Aug-Dec (months 7-11)
+  const semester = month <= 6 ? 'sp' : 'fa';
+  const semesterYear = String(year).slice(-2);
+  
+  return `${semester}${semesterYear}`;
+}
+
 export const useOfficers = () => {
   const [officers, setOfficers] = useState<Officer[]>([]);
   const [loading, setLoading] = useState(true);
@@ -12,8 +25,9 @@ export const useOfficers = () => {
         setLoading(true);
         setError(null);
         
-        // Fetch from the pre-built JSON file
-        const response = await fetch('/fetched/officers/officers.json');
+        // Get current semester and fetch from the semester-specific directory
+        const semester = getCurrentSemester();
+        const response = await fetch(`/fetched/officers/${semester}/officers-${semester}.json`);
         
         if (!response.ok) {
           throw new Error(`Failed to fetch officers data: ${response.status}`);

@@ -19,7 +19,14 @@ node scripts/fetch-officers-fa25.js --force
 ### `fetch-officers-notion.js`
 Fetches current semester officer data from a Notion database.
 
-**Output:** `/public/fetched/officers/officers.json`
+**Output:** `/public/fetched/officers/{semester}/officers-{semester}.json`
+
+The semester is automatically determined from:
+1. The "Semester" column in the Notion database (if present)
+2. Current date if no semester is specified:
+   - **Spring (sp)**: January - July
+   - **Fall (fa)**: August - December
+   - Format: `sp26`, `fa25`, etc.
 
 **Environment Variables Required:**
 - `NOTION_API_KEY` - Your Notion integration API key
@@ -31,6 +38,27 @@ npm run fetch-notion
 # or with force rebuild
 node scripts/fetch-officers-notion.js --force
 ```
+
+## Directory Structure
+
+Each script manages its own semester-specific subdirectory:
+```
+public/fetched/officers/
+├── fa25/
+│   ├── officers-fa25.json
+│   ├── .sheet-hash
+│   └── [officer images]
+├── sp26/
+│   ├── officers-sp26.json
+│   ├── .notion-hash
+│   └── [officer images]
+└── ...
+```
+
+This ensures that:
+- Multiple semesters can coexist
+- Each script only modifies its own semester directory
+- No data is accidentally overwritten
 
 ## Setup
 
