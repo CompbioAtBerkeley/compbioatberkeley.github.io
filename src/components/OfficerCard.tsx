@@ -4,9 +4,18 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { FaGlobe, FaLinkedin, FaGithub } from "react-icons/fa";
 import { Info } from "lucide-react";
 import { Officer } from "@/types/officers";
+import { ReactNode } from "react";
 
 interface OfficerCardProps {
   officer: Officer;
+}
+
+interface SocialLink {
+  id: string;
+  value: string;
+  icon: ReactNode;
+  title: string;
+  formatUrl: (v: string) => string;
 }
 
 export const OfficerCard = ({ officer }: OfficerCardProps) => {
@@ -22,6 +31,48 @@ export const OfficerCard = ({ officer }: OfficerCardProps) => {
 
   // Default placeholder image path
   const defaultImage = '/placeholder.svg';
+
+  // Social links configuration
+  const socialLinks: SocialLink[] = [
+    {
+      id: 'personalWebsite',
+      value: personalWebsite,
+      icon: <FaGlobe className="w-4 h-4" />,
+      title: 'Personal Website',
+      formatUrl: (v) => v.startsWith('http') ? v : `https://${v}`,
+    },
+    {
+      id: 'linkedin',
+      value: linkedin,
+      icon: <FaLinkedin className="w-4 h-4" />,
+      title: 'LinkedIn',
+      formatUrl: (v) => v.startsWith('http') ? v : `https://linkedin.com/in/${v}`,
+    },
+    {
+      id: 'github',
+      value: github,
+      icon: <FaGithub className="w-4 h-4" />,
+      title: 'GitHub',
+      formatUrl: (v) => v.startsWith('http') ? v : `https://github.com/${v}`,
+    },
+  ];
+
+  const renderSocialLink = (link: SocialLink) => {
+    if (!link.value || link.value.trim() === '') return null;
+
+    return (
+      <a
+        key={link.id}
+        href={link.formatUrl(link.value)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-bio-green hover:text-bio-green/80 transition-colors"
+        title={link.title}
+      >
+        {link.icon}
+      </a>
+    );
+  };
 
   return (
     <Card className="border-bio-green/20 hover:shadow-bio transition-all duration-300 h-full">
@@ -75,39 +126,7 @@ export const OfficerCard = ({ officer }: OfficerCardProps) => {
                 </HoverCardContent>
               </HoverCard>
             )}
-            {personalWebsite && personalWebsite.trim() !== '' && (
-              <a
-                href={personalWebsite.startsWith('http') ? personalWebsite : `https://${personalWebsite}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-bio-green hover:text-bio-green/80 transition-colors"
-                title="Personal Website"
-              >
-                <FaGlobe className="w-4 h-4" />
-              </a>
-            )}
-            {linkedin && linkedin.trim() !== '' && (
-              <a
-                href={linkedin.startsWith('http') ? linkedin : `https://linkedin.com/in/${linkedin}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-bio-green hover:text-bio-green/80 transition-colors"
-                title="LinkedIn"
-              >
-                <FaLinkedin className="w-4 h-4" />
-              </a>
-            )}
-            {github && github.trim() !== '' && (
-              <a
-                href={github.startsWith('http') ? github : `https://github.com/${github}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-bio-green hover:text-bio-green/80 transition-colors"
-                title="GitHub"
-              >
-                <FaGithub className="w-4 h-4" />
-              </a>
-            )}
+            {socialLinks.map(renderSocialLink)}
             {orcid && orcid.trim() !== '' && (
               <a
                 href={orcid.startsWith('http') ? orcid : `https://orcid.org/${orcid}`}

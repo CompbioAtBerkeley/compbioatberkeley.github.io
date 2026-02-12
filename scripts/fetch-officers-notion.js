@@ -203,7 +203,7 @@ async function parseNotionPages(pages, notion) {
         image: props['headshot']?.files ? getFileUrl(props['headshot'].files) : '',
         bio: props['Bio']?.rich_text ? getPlainText(props['Bio'].rich_text) : '',
         "personal website": props['Personal Website']?.url ? getUrl(props['Personal Website'].url) : '',
-        linkedin: props['linkedin']?.url ? getUrl(props['linkedin'].url) : '',
+        linkedin: props['Linkedin']?.url ? getUrl(props['Linkedin'].url) : '',
         github: props['GitHub']?.url ? getUrl(props['GitHub'].url) : '',
         orcid: props['ORCID']?.url ? getUrl(props['ORCID'].url) : '',
       };
