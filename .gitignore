@@ -37,3 +37,8 @@ my-vite-app/*
 
 # others
 dev/
+
+## EXTREMELEY IMPORTANT: DO NOT COMMIT THE FOLDER BELOW.
+## It doesn't contain sensitive data but it's fetched at build time, and
+## it may be quite heavy so there is no point in keeping it committed to the repository.
+public/fetched
