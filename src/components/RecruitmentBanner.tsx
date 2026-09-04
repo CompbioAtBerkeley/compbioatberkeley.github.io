@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { ArrowRight, Dna, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const dismissalKey = "compbio-fall-2026-recruitment-dismissed";
+const dismissalKey = "compbio-fall-2026-recruitment-update-2026-09-03-dismissed";
 const coffeeChatLink =
   "https://docs.google.com/document/d/1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU/edit?usp=sharing";
 const useBrowserLayoutEffect =
@@ -51,9 +51,9 @@ const RecruitmentBanner = () => {
             <Dna className="h-4 w-4 shrink-0 text-label" aria-hidden="true" />
             <p className="min-w-0 text-[13px] leading-5 text-foreground">
               <strong className="font-bold text-heading">
-                We are currently recruiting for Fall 2026.
+                Fall 2026 recruitment timeline updated.
               </strong>{" "}
-              Sign up and schedule a coffee chat.
+              Apply by September 11 at 5 PM.
             </p>
           </div>
 

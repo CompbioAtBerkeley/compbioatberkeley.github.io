@@ -154,6 +154,12 @@ for (const page of pages) {
     assert.match(mainHtml, /There is no live Model Context Protocol endpoint or manifest/i);
     assert.match(mainHtml, /Same-URL Accept: text\/markdown content negotiation is not provided/i);
   }
+  if (page.path === "/signup/") {
+    assert.match(mainHtml, /Updated Fall 2026 recruitment timeline/);
+    assert.match(mainHtml, /September 9/);
+    assert.match(mainHtml, /VLSB 2030/);
+    assert.doesNotMatch(mainHtml, /September 7/);
+  }
 }
 
 const robots = await fs.readFile(path.join(distDirectory, "robots.txt"), "utf8");
