@@ -137,6 +137,7 @@ for (const page of pages) {
   assert.doesNotMatch(html, /https:\/\/forms\.gle\/EQmWP1JWzDzrFji79/);
   assert.doesNotMatch(html, /https:\/\/linktr\.ee\/compbioatberkeley/);
   assert.ok(html.includes('href="https://linktr.ee/UCB_CompBio"'));
+  assert.match(html, />Join Us<\/a>/, `${page.path} navigation must label the signup route “Join Us”`);
   if (page.path === "/") {
     assert.ok(mainTextLength >= 2000, `home SSR text must be substantial; received ${mainTextLength}`);
     const contentEfficiency = visibleText(html).length / html.length;

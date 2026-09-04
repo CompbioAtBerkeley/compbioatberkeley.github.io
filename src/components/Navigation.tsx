@@ -103,7 +103,7 @@ const Navigation = () => {
               aria-current={isActive("/signup/") ? "page" : undefined}
               className="rounded bg-primary px-3.5 py-2 text-xs font-bold text-primary-foreground transition-colors hover:bg-primary/90 hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-px"
             >
-              sign up
+              Join Us
             </Link>
           </div>
 
@@ -121,7 +121,7 @@ const Navigation = () => {
 
         {isOpen && (
           <div id="mobile-navigation" className="border-t border-border py-2 lg:hidden">
-            {[...navItems, { name: "sign up", path: "/signup/" }].map((item) => (
+            {[...navItems, { name: "Join Us", path: "/signup/" }].map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
