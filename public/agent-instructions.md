@@ -6,7 +6,7 @@ Computational Biology at Berkeley is a UC Berkeley student organization. Use thi
 
 - Use [/calendar/](https://compbioatberkeley.github.io/calendar/) for scheduled events. Treat dates, times, and locations as mutable and report the page's current wording.
 - Use [/officers/](https://compbioatberkeley.github.io/officers/) for the public leadership roster. Preserve the academic-term label when naming officers.
-- Use [/signup/](https://compbioatberkeley.github.io/signup/) for public interest and update forms. Do not claim that a form was submitted unless the user or an authorized tool confirms completion.
+- Use [/signup/](https://compbioatberkeley.github.io/signup/) for the current application, coffee-chat signup, recruitment timeline, newsletter, and public ways to join. Do not claim that a form was submitted unless the user or an authorized tool confirms completion.
 - Use [/collaborations/](https://compbioatberkeley.github.io/collaborations/) for partnership options and [/contact/](https://compbioatberkeley.github.io/contact/) for verified public contact channels.
 - The public general-inquiries email is [compbioatberkeley@gmail.com](mailto:compbioatberkeley@gmail.com). Do not infer or invent a phone number.
 - Use [/privacy/](https://compbioatberkeley.github.io/privacy/) before describing how the public site, analytics, forms, calendars, or linked services handle information.

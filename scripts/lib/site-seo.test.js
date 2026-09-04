@@ -249,6 +249,15 @@ test("llms.txt follows the agent guidance format and states capability boundarie
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/agent-instructions\.md/);
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/developers\//);
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/developers\.md/);
+  assert.match(llmsText, /## Fall 2026 recruitment/);
+  assert.match(llmsText, /https:\/\/forms\.gle\/4cR1nfRoLb2LGNbi7/);
+  assert.match(llmsText, /https:\/\/forms\.gle\/qCxn93mfunF3Dtep7/);
+  assert.match(
+    llmsText,
+    /https:\/\/docs\.google\.com\/document\/d\/1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU\/edit\?usp=sharing/,
+  );
+  assert.match(llmsText, /September 11 at 5 PM/);
+  assert.match(llmsText, /September 12–13: Interviews/);
   assert.match(llmsText, /does not expose a public API or MCP server/i);
 });
 

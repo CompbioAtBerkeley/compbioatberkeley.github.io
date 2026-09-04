@@ -9,7 +9,7 @@ The organization welcomes students at all experience levels. Event details, offi
 - [Mission and programs](https://compbioatberkeley.github.io/about/): Use when answering what the organization does, who it serves, or how education, projects, networking, and community work fit together.
 - [Current events](https://compbioatberkeley.github.io/calendar/): Use for event dates, times, and locations; preserve the displayed timezone and treat details as mutable.
 - [Current leadership](https://compbioatberkeley.github.io/officers/): Use for public officer names, roles, bios, and links; always preserve the displayed academic term.
-- [Participation](https://compbioatberkeley.github.io/signup/): Use for public ways to join or receive updates; do not claim a form was submitted without confirmation.
+- [Participation](https://compbioatberkeley.github.io/signup/): Use for the current application, coffee-chat signup, recruitment timeline, newsletter, and public ways to join; do not claim a form was submitted without confirmation.
 - [Partnerships](https://compbioatberkeley.github.io/collaborations/): Use for research, speaker, sponsorship, and industry collaboration options.
 - [Agent instructions](https://compbioatberkeley.github.io/agent-instructions.md): Use for source-selection rules, safety boundaries, and capability limits.
 - [Developer resources](https://compbioatberkeley.github.io/developers/): Use for machine-readable files and explicit API, OpenAPI, authentication, webhook, Markdown, and MCP capability status.
@@ -21,10 +21,24 @@ The organization welcomes students at all experience levels. Event details, offi
 - [Calendar](https://compbioatberkeley.github.io/calendar/): Current workshops, meetings, and special events in Pacific time.
 - [Collaborations](https://compbioatberkeley.github.io/collaborations/): Partnership opportunities for students, faculty, alumni, research groups, and industry.
 - [Officers](https://compbioatberkeley.github.io/officers/): Fall 2026 and previous student leadership rosters, including submitted public bios and profile links.
-- [Join](https://compbioatberkeley.github.io/signup/): Interest form, newsletter signup, and community channels.
+- [Join Us](https://compbioatberkeley.github.io/signup/): Fall 2026 application, coffee-chat signup, recruitment timeline, newsletter signup, and community channels.
 - [Contact](https://compbioatberkeley.github.io/contact/): Verified public channels for general questions, partnerships, events, and participation.
 - [Privacy](https://compbioatberkeley.github.io/privacy/): How analytics, browser preferences, embedded services, forms, and external platforms handle information.
 - [Developers](https://compbioatberkeley.github.io/developers/): Supported machine-readable resources and current technical capability boundaries.
+
+## Fall 2026 recruitment
+
+- August 26: Applications and coffee chats open.
+- [Application](https://forms.gle/4cR1nfRoLb2LGNbi7): Applications close September 11 at 5 PM.
+- [Coffee chats](https://docs.google.com/document/d/1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU/edit?usp=sharing): Current coffee-chat scheduling document.
+- [Newsletter](https://forms.gle/qCxn93mfunF3Dtep7): Subscribe for club news, socials, general meetings, and professional opportunities.
+- August 27: Calapalooza and tabling.
+- September 2: Info session #1, 8–10 PM in Hildebrand B56.
+- September 3: Meet the PMs and officers, 6–8 PM at the Glade.
+- September 8: Applicant social, 6–8 PM; location TBD.
+- September 9: Info session #2, 8–10 PM in VLSB 2030.
+- September 12–13: Interviews.
+- Re-fetch the [Join Us page](https://compbioatberkeley.github.io/signup/) before answering because recruitment dates, locations, and forms may change.
 
 ## Contact and community
 
