@@ -68,6 +68,10 @@ test("the shared public-page registry covers every indexable site route", () => 
   assert.ok(registry.every((page) => page.title && page.description));
   assert.ok(registry.every((page) => !page.path.startsWith("/concepts")));
   assert.equal(
+    registry.find((page) => page.path === "/signup/")?.title,
+    "Join Us | Computational Biology at Berkeley",
+  );
+  assert.equal(
     registry.find((page) => page.path === "/developers/")?.markdownPath,
     "/developers.md",
   );
