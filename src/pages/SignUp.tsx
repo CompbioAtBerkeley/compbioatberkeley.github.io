@@ -7,7 +7,7 @@ import { publicAssetPath } from "@/lib/publicAsset";
 
 const INTEREST_FORM = "https://forms.gle/EQmWP1JWzDzrFji79";
 const NEWSLETTER_FORM = "https://forms.gle/qCxn93mfunF3Dtep7";
-const RECRUITMENT_POST = "https://www.instagram.com/p/DcUXakNy7cj/";
+const INSTAGRAM_PROFILE = "https://www.instagram.com/ucb_compbio/";
 const COFFEE_CHAT_LINK =
   "https://docs.google.com/document/d/1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU/edit?usp=sharing";
 
@@ -30,6 +30,17 @@ const forms = [
     preview: "/forms/newsletter-form-preview.webp",
     featured: false,
   },
+];
+
+const recruitmentEvents = [
+  { date: "August 26", title: "Applications and coffee chats open" },
+  { date: "August 27", title: "Calapalooza and tabling" },
+  { date: "September 2", title: "Info session #1", details: "8–10 PM · Hildebrand B56" },
+  { date: "September 3", title: "Meet the PMs and officers", details: "6–8 PM · the Glade" },
+  { date: "September 8", title: "Applicant social", details: "6–8 PM · location TBD" },
+  { date: "September 9", title: "Info session #2", details: "8–10 PM · VLSB 2030" },
+  { date: "September 11", title: "Application due", details: "5 PM" },
+  { date: "September 12–13", title: "Interviews" },
 ];
 
 const socials = [
@@ -66,35 +77,50 @@ const SignUp = () => (
         <article className="overflow-hidden rounded border border-border bg-card lg:col-span-2">
           <div className="grid lg:grid-cols-[minmax(280px,0.72fr)_1.28fr]">
             <a
-              href={RECRUITMENT_POST}
+              href={INSTAGRAM_PROFILE}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="View the Fall 2026 recruitment timeline on Instagram (opens in a new tab)"
-              className="group relative block overflow-hidden bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+              aria-label="View current Fall 2026 recruitment updates on Instagram (opens in a new tab)"
+              className="group relative block aspect-[4/5] self-start overflow-hidden bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
             >
               <img
                 src={publicAssetPath("/recruitment/fa26/recruitment-timeline.webp")}
-                alt="Fall 2026 recruitment timeline: applications open August 26, Calapalooza August 27, info sessions September 2 and 7, officers event September 3, applicant social September 8, applications due September 11 at 5 PM, and interviews September 12–13."
+                alt="Updated Fall 2026 recruitment timeline graphic"
                 width="1080"
                 height="1350"
                 loading="eager"
                 decoding="async"
-                className="h-full max-h-[42rem] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.015]"
+                className="h-full w-full object-contain object-top transition-opacity duration-300 group-hover:opacity-95"
               />
               <span className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 rounded bg-background/95 px-4 py-3 text-sm font-bold text-heading shadow-sm backdrop-blur-sm">
-                View the original post
+                View current updates
                 <ExternalLink className="h-4 w-4 shrink-0 text-link" aria-hidden="true" />
               </span>
             </a>
 
             <div className="flex flex-col justify-center p-6 md:p-8 lg:p-10">
               <p className="eyebrow">Fall 2026 recruitment</p>
-              <h2 className="mt-3 text-3xl font-bold text-heading">Fall 2026 recruitment is open</h2>
+              <h2 className="mt-3 text-3xl font-bold text-heading">Updated Fall 2026 recruitment timeline</h2>
               <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-muted-foreground">
-                Applications and coffee chats are open now. Meet us at Calapalooza, join an info
-                session, and get to know our project managers and officers before applications
-                close September 11 at 5 PM.
+                Applications and coffee chats are open. Join us at an upcoming event before
+                applications close September 11 at 5 PM.
               </p>
+
+              <dl className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                {recruitmentEvents.map((event) => (
+                  <div key={`${event.date}-${event.title}`}>
+                    <dt className="text-[11px] font-bold uppercase tracking-[0.14em] text-label">
+                      {event.date}
+                    </dt>
+                    <dd className="mt-1 text-sm font-bold text-heading">{event.title}</dd>
+                    {event.details ? (
+                      <dd className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                        {event.details}
+                      </dd>
+                    ) : null}
+                  </div>
+                ))}
+              </dl>
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <EnhancedButton asChild variant="gold" size="lg">
@@ -112,8 +138,8 @@ const SignUp = () => (
                   </a>
                 </EnhancedButton>
                 <EnhancedButton asChild variant="outline" size="lg">
-                  <a href={RECRUITMENT_POST} target="_blank" rel="noopener noreferrer">
-                    View timeline on Instagram
+                  <a href={INSTAGRAM_PROFILE} target="_blank" rel="noopener noreferrer">
+                    View updates on Instagram
                     <ExternalLink />
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
