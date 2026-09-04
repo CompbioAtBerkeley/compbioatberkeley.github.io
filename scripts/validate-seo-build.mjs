@@ -134,6 +134,9 @@ for (const page of pages) {
   }
 
   const mainTextLength = visibleText(mainHtml).length;
+  assert.doesNotMatch(html, /https:\/\/forms\.gle\/EQmWP1JWzDzrFji79/);
+  assert.doesNotMatch(html, /https:\/\/linktr\.ee\/compbioatberkeley/);
+  assert.ok(html.includes('href="https://linktr.ee/UCB_CompBio"'));
   if (page.path === "/") {
     assert.ok(mainTextLength >= 2000, `home SSR text must be substantial; received ${mainTextLength}`);
     const contentEfficiency = visibleText(html).length / html.length;
@@ -156,11 +159,27 @@ for (const page of pages) {
   }
   if (page.path === "/signup/") {
     assert.match(mainHtml, /Updated Fall 2026 recruitment timeline/);
+    assert.ok(mainHtml.includes('href="https://forms.gle/4cR1nfRoLb2LGNbi7"'));
+    assert.ok(
+      mainHtml.includes(
+        'href="https://docs.google.com/document/d/1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU/edit?usp=sharing"',
+      ),
+    );
+    assert.ok(mainHtml.includes('href="https://linktr.ee/UCB_CompBio"'));
     assert.match(mainHtml, /September 9/);
     assert.match(mainHtml, /VLSB 2030/);
     assert.doesNotMatch(mainHtml, /September 7/);
   }
+  if (page.path === "/") {
+    assert.ok(mainHtml.includes('href="https://forms.gle/4cR1nfRoLb2LGNbi7"'));
+  }
+  if (["/contact/", "/collaborations/"].includes(page.path)) {
+    assert.ok(mainHtml.includes('href="https://linktr.ee/UCB_CompBio"'));
+  }
 }
+
+assert.doesNotMatch(llmsText, /https:\/\/linktr\.ee\/compbioatberkeley/);
+assert.match(llmsText, /https:\/\/linktr\.ee\/UCB_CompBio/);
 
 const robots = await fs.readFile(path.join(distDirectory, "robots.txt"), "utf8");
 const notFound = await fs.readFile(path.join(distDirectory, "404.html"), "utf8");

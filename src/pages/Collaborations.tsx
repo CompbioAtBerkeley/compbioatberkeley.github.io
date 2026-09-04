@@ -5,7 +5,7 @@ import { PageHeader, SectionHeading } from "@/components/PageHeader";
 
 const LINKEDIN =
   "https://www.linkedin.com/company/computational-biology-at-berkeley/";
-const LINKTREE = "https://linktr.ee/compbioatberkeley";
+const LINKTREE = "https://linktr.ee/UCB_CompBio";
 
 const Collaborations = () => (
   <div>

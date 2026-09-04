@@ -30,7 +30,7 @@ The organization welcomes students at all experience levels. Event details, offi
 
 - [Email](mailto:compbioatberkeley@gmail.com): General questions and collaboration inquiries; do not send sensitive information.
 - [LinkedIn](https://www.linkedin.com/company/computational-biology-at-berkeley/): Organization updates and professional contact.
-- [Linktree](https://linktr.ee/compbioatberkeley): Current collection of public links and contact destinations.
+- [Linktree](https://linktr.ee/UCB_CompBio): Current collection of public links and contact destinations.
 - [GitHub](https://github.com/CompbioAtBerkeley): Public organization repositories.
 
 ## Machine-readable resources

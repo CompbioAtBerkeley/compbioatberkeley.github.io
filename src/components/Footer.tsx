@@ -18,7 +18,7 @@ const socialLinks = [
   { name: "linkedin", url: "https://www.linkedin.com/company/computational-biology-at-berkeley/" },
   { name: "github", url: "https://github.com/CompbioAtBerkeley" },
   { name: "projects", url: "https://github.com/Compbio-at-berkeley-projects" },
-  { name: "linktree", url: "https://linktr.ee/compbioatberkeley" },
+  { name: "linktree", url: "https://linktr.ee/UCB_CompBio" },
 ];
 
 const Footer = () => (

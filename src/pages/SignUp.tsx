@@ -5,19 +5,20 @@ import { EnhancedButton } from "@/components/ui/enhanced-button";
 import { PageHeader } from "@/components/PageHeader";
 import { publicAssetPath } from "@/lib/publicAsset";
 
-const INTEREST_FORM = "https://forms.gle/EQmWP1JWzDzrFji79";
+const APPLICATION_FORM = "https://forms.gle/4cR1nfRoLb2LGNbi7";
 const NEWSLETTER_FORM = "https://forms.gle/qCxn93mfunF3Dtep7";
 const INSTAGRAM_PROFILE = "https://www.instagram.com/ucb_compbio/";
+const LINKTREE = "https://linktr.ee/UCB_CompBio";
 const COFFEE_CHAT_LINK =
   "https://docs.google.com/document/d/1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU/edit?usp=sharing";
 
 const forms = [
   {
-    eyebrow: "Fall 2026 interest form",
-    title: "Express interest",
-    body: "Tell us you are interested and receive application updates, event announcements, and opportunities.",
-    src: INTEREST_FORM,
-    cta: "Fill out the interest form",
+    eyebrow: "Fall 2026 application",
+    title: "Apply to CompBio at Berkeley",
+    body: "Submit your application by September 11 at 5 PM to join us for Fall 2026.",
+    src: APPLICATION_FORM,
+    cta: "Open the application",
     preview: "/forms/interest-form-preview.webp",
     featured: true,
   },
@@ -59,7 +60,7 @@ const socials = [
   {
     name: "Linktree",
     detail: "All club links",
-    url: "https://linktr.ee/compbioatberkeley",
+    url: LINKTREE,
     icon: SiLinktree,
   },
 ];
@@ -124,8 +125,8 @@ const SignUp = () => (
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <EnhancedButton asChild variant="gold" size="lg">
-                  <a href={INTEREST_FORM} target="_blank" rel="noopener noreferrer">
-                    Express interest
+                  <a href={APPLICATION_FORM} target="_blank" rel="noopener noreferrer">
+                    Apply now
                     <ExternalLink />
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
@@ -140,6 +141,13 @@ const SignUp = () => (
                 <EnhancedButton asChild variant="outline" size="lg">
                   <a href={INSTAGRAM_PROFILE} target="_blank" rel="noopener noreferrer">
                     View updates on Instagram
+                    <ExternalLink />
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </EnhancedButton>
+                <EnhancedButton asChild variant="outline" size="lg">
+                  <a href={LINKTREE} target="_blank" rel="noopener noreferrer">
+                    View all links
                     <ExternalLink />
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
