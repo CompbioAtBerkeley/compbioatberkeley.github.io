@@ -151,7 +151,7 @@ test("publishes exact brand metadata and developer discovery links in the HTML s
     "CompBio at Berkeley",
     "compbioatberkeley.github.io",
   ]);
-  assert.ok(identity.sameAs.includes("https://linktr.ee/compbioatberkeley"));
+  assert.ok(identity.sameAs.includes("https://linktr.ee/UCB_CompBio"));
   assert.match(
     entry,
     /<meta name="application-name" content="Computational Biology at Berkeley" \/>/,

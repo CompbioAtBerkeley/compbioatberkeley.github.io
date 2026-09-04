@@ -46,12 +46,13 @@ const Home = () => (
           <div className="mt-8 flex flex-wrap gap-3">
             <EnhancedButton asChild variant="primary" size="lg">
               <a
-                href="https://forms.gle/EQmWP1JWzDzrFji79"
+                href="https://forms.gle/4cR1nfRoLb2LGNbi7"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                sign up for updates
+                apply for Fall 2026
                 <ExternalLink />
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </EnhancedButton>
             <EnhancedButton asChild variant="outline" size="lg">
