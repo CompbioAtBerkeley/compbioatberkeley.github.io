@@ -181,6 +181,16 @@ for (const page of pages) {
 
 assert.doesNotMatch(llmsText, /https:\/\/linktr\.ee\/compbioatberkeley/);
 assert.match(llmsText, /https:\/\/linktr\.ee\/UCB_CompBio/);
+assert.match(llmsText, /https:\/\/forms\.gle\/4cR1nfRoLb2LGNbi7/);
+assert.match(llmsText, /https:\/\/forms\.gle\/qCxn93mfunF3Dtep7/);
+assert.match(
+  llmsText,
+  /https:\/\/docs\.google\.com\/document\/d\/1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU\/edit\?usp=sharing/,
+);
+assert.match(llmsText, /September 2: Info session #1, 8–10 PM in Hildebrand B56/);
+assert.match(llmsText, /September 9: Info session #2, 8–10 PM in VLSB 2030/);
+assert.match(llmsText, /September 11 at 5 PM/);
+assert.match(llmsText, /September 12–13: Interviews/);
 
 const robots = await fs.readFile(path.join(distDirectory, "robots.txt"), "utf8");
 const notFound = await fs.readFile(path.join(distDirectory, "404.html"), "utf8");

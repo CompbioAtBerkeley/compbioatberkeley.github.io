@@ -59,6 +59,15 @@ The validator reports unmatched responses, invalid public links, missing assets,
 - Pushes to `dev` deploy the staging GitHub Pages site from the `Hilo-Hilo` staging repository.
 - Pushes to `main` deploy production from `CompbioAtBerkeley/compbioatberkeley.github.io`.
 
+Before every staging or production deployment, review changed public facts,
+links, route descriptions, and capability claims against `public/llms.txt`.
+Update `llms.txt` in the same change whenever it indexes or summarizes the
+affected information. Review `public/agent-instructions.md` and
+`public/developers.md` at the same time when source-selection guidance or
+technical capabilities change. `npm test` and `npm run build` enforce the
+machine-readable facts that can be checked automatically; after deployment,
+verify the live `/llms.txt` from the same commit as the HTML site.
+
 Neither build reads Notion or Google Sheets credentials. Form intake is
 reviewed and versioned before publication, so the same commit produces the same
 site in local, staging, and production environments. The separate weekly/manual
