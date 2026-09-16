@@ -23,7 +23,7 @@ const socials = [
   {
     name: "Linktree",
     detail: "All club links",
-    url: "https://linktr.ee/compbioatberkeley",
+    url: "https://linktr.ee/UCB_CompBio",
     icon: SiLinktree,
   },
 ];

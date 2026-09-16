@@ -68,6 +68,10 @@ test("the shared public-page registry covers every indexable site route", () => 
   assert.ok(registry.every((page) => page.title && page.description));
   assert.ok(registry.every((page) => !page.path.startsWith("/concepts")));
   assert.equal(
+    registry.find((page) => page.path === "/signup/")?.title,
+    "Join Us | Computational Biology at Berkeley",
+  );
+  assert.equal(
     registry.find((page) => page.path === "/developers/")?.markdownPath,
     "/developers.md",
   );
@@ -151,7 +155,7 @@ test("publishes exact brand metadata and developer discovery links in the HTML s
     "CompBio at Berkeley",
     "compbioatberkeley.github.io",
   ]);
-  assert.ok(identity.sameAs.includes("https://linktr.ee/compbioatberkeley"));
+  assert.ok(identity.sameAs.includes("https://linktr.ee/UCB_CompBio"));
   assert.match(
     entry,
     /<meta name="application-name" content="Computational Biology at Berkeley" \/>/,
@@ -249,6 +253,10 @@ test("llms.txt follows the agent guidance format and states capability boundarie
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/agent-instructions\.md/);
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/developers\//);
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/developers\.md/);
+  assert.match(llmsText, /https:\/\/forms\.gle\/qCxn93mfunF3Dtep7/);
+  assert.doesNotMatch(llmsText, /## Fall 2026 recruitment/);
+  assert.doesNotMatch(llmsText, /https:\/\/forms\.gle\/4cR1nfRoLb2LGNbi7/);
+  assert.doesNotMatch(llmsText, /1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU/);
   assert.match(llmsText, /does not expose a public API or MCP server/i);
 });
 

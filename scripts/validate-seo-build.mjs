@@ -134,6 +134,10 @@ for (const page of pages) {
   }
 
   const mainTextLength = visibleText(mainHtml).length;
+  assert.doesNotMatch(html, /https:\/\/forms\.gle\/EQmWP1JWzDzrFji79/);
+  assert.doesNotMatch(html, /https:\/\/linktr\.ee\/compbioatberkeley/);
+  assert.ok(html.includes('href="https://linktr.ee/UCB_CompBio"'));
+  assert.match(html, />Join Us<\/a>/, `${page.path} navigation must label the signup route “Join Us”`);
   if (page.path === "/") {
     assert.ok(mainTextLength >= 2000, `home SSR text must be substantial; received ${mainTextLength}`);
     const contentEfficiency = visibleText(html).length / html.length;
@@ -154,7 +158,29 @@ for (const page of pages) {
     assert.match(mainHtml, /There is no live Model Context Protocol endpoint or manifest/i);
     assert.match(mainHtml, /Same-URL Accept: text\/markdown content negotiation is not provided/i);
   }
+  if (page.path === "/signup/") {
+    assert.match(mainHtml, /Recruiting for fall 2026 has ended\./);
+    assert.ok(mainHtml.includes('href="https://forms.gle/qCxn93mfunF3Dtep7"'));
+    assert.ok(mainHtml.includes('href="https://linktr.ee/UCB_CompBio"'));
+    assert.doesNotMatch(mainHtml, /https:\/\/forms\.gle\/4cR1nfRoLb2LGNbi7/);
+    assert.doesNotMatch(mainHtml, /Schedule a coffee chat/);
+    assert.doesNotMatch(mainHtml, /recruitment timeline/i);
+  }
+  if (page.path === "/") {
+    assert.ok(mainHtml.includes(`href="${basePath}signup/"`));
+    assert.doesNotMatch(mainHtml, /https:\/\/forms\.gle\/4cR1nfRoLb2LGNbi7/);
+  }
+  if (["/contact/", "/collaborations/"].includes(page.path)) {
+    assert.ok(mainHtml.includes('href="https://linktr.ee/UCB_CompBio"'));
+  }
 }
+
+assert.doesNotMatch(llmsText, /https:\/\/linktr\.ee\/compbioatberkeley/);
+assert.match(llmsText, /https:\/\/linktr\.ee\/UCB_CompBio/);
+assert.match(llmsText, /https:\/\/forms\.gle\/qCxn93mfunF3Dtep7/);
+assert.doesNotMatch(llmsText, /https:\/\/forms\.gle\/4cR1nfRoLb2LGNbi7/);
+assert.doesNotMatch(llmsText, /1ZGq3KV4MprEdPDUu8v7QO9AuGSpB2eEmsyVCCK9nLDU/);
+assert.doesNotMatch(llmsText, /## Fall 2026 recruitment/);
 
 const robots = await fs.readFile(path.join(distDirectory, "robots.txt"), "utf8");
 const notFound = await fs.readFile(path.join(distDirectory, "404.html"), "utf8");

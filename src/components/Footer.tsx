@@ -7,7 +7,7 @@ const quickLinks = [
   { name: "calendar", path: "/calendar/" },
   { name: "collaborations", path: "/collaborations/" },
   { name: "officers", path: "/officers/" },
-  { name: "sign up", path: "/signup/" },
+  { name: "Join Us", path: "/signup/" },
   { name: "contact", path: "/contact/" },
   { name: "privacy", path: "/privacy/" },
   { name: "developers", path: "/developers/" },
@@ -18,7 +18,7 @@ const socialLinks = [
   { name: "linkedin", url: "https://www.linkedin.com/company/computational-biology-at-berkeley/" },
   { name: "github", url: "https://github.com/CompbioAtBerkeley" },
   { name: "projects", url: "https://github.com/Compbio-at-berkeley-projects" },
-  { name: "linktree", url: "https://linktr.ee/compbioatberkeley" },
+  { name: "linktree", url: "https://linktr.ee/UCB_CompBio" },
 ];
 
 const Footer = () => (

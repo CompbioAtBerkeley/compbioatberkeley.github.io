@@ -22,7 +22,7 @@ const contactChannels = [
     detail:
       "Use Linktree when you need the latest public signup, application, or community link. Forms are hosted by their respective providers, and their availability may follow a recruitment or project cycle.",
     action: "open our Linktree",
-    href: "https://linktr.ee/compbioatberkeley",
+    href: "https://linktr.ee/UCB_CompBio",
   },
 ];
 
