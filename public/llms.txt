@@ -16,12 +16,12 @@ The organization welcomes students at all experience levels. Event details, offi
 
 ## Main pages
 
-- [Home](https://compbioatberkeley.github.io/): Overview of the organization, its objectives, Fall 2026 recruitment notice, and current calls to action.
+- [Home](https://compbioatberkeley.github.io/): Overview of the organization, its objectives, and current calls to action.
 - [About](https://compbioatberkeley.github.io/about/): Mission and work across education, research, professional networking, and community impact.
 - [Calendar](https://compbioatberkeley.github.io/calendar/): Current workshops, meetings, and special events in Pacific time.
 - [Collaborations](https://compbioatberkeley.github.io/collaborations/): Partnership opportunities for students, faculty, alumni, research groups, and industry.
 - [Officers](https://compbioatberkeley.github.io/officers/): Fall 2026 and previous student leadership rosters, including submitted public bios and profile links.
-- [Join](https://compbioatberkeley.github.io/signup/): Interest form, newsletter signup, and community channels.
+- [Join](https://compbioatberkeley.github.io/signup/): Recruitment status, newsletter signup, and community channels.
 - [Contact](https://compbioatberkeley.github.io/contact/): Verified public channels for general questions, partnerships, events, and participation.
 - [Privacy](https://compbioatberkeley.github.io/privacy/): How analytics, browser preferences, embedded services, forms, and external platforms handle information.
 - [Developers](https://compbioatberkeley.github.io/developers/): Supported machine-readable resources and current technical capability boundaries.

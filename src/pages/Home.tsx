@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
 import { EnhancedButton } from "@/components/ui/enhanced-button";
 import { HeroGenomePathfinder } from "@/components/HeroGenomePathfinder";
 import { HeroScienceGraphic } from "@/components/HeroScienceGraphic";
 import { PartnerLogoWall } from "@/components/PartnerLogoWall";
 import { SectionHeading } from "@/components/PageHeader";
-import RecruitmentBanner from "@/components/RecruitmentBanner";
 
 const objectives = [
   {
@@ -27,8 +25,6 @@ const objectives = [
 
 const Home = () => (
   <div>
-    <RecruitmentBanner />
-
     <section className="hero-shell relative isolate overflow-hidden border-b border-border bg-background">
       <div className="absolute inset-0 z-0 bg-lab-grid" aria-hidden="true" />
       <HeroGenomePathfinder />
@@ -45,14 +41,7 @@ const Home = () => (
 
           <div className="mt-8 flex flex-wrap gap-3">
             <EnhancedButton asChild variant="primary" size="lg">
-              <a
-                href="https://forms.gle/EQmWP1JWzDzrFji79"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                sign up for updates
-                <ExternalLink />
-              </a>
+              <Link to="/signup/">stay connected</Link>
             </EnhancedButton>
             <EnhancedButton asChild variant="outline" size="lg">
               <Link to="/about/">about us</Link>
@@ -71,8 +60,9 @@ const Home = () => (
       <p className="mb-8 max-w-[68ch] text-sm leading-relaxed text-muted-foreground md:text-base">
         We make computational biology easier to enter and more useful to practice. Members can learn
         core methods, meet collaborators across disciplines, and apply those skills in student-led
-        work. Our public calendar, officer directory, collaboration information, and interest forms
-        are the best starting points for students and partners looking for current opportunities.
+        work. Our public calendar, officer directory, collaboration information, newsletter, and
+        community channels are the best starting points for students and partners looking for
+        current opportunities.
       </p>
       <div className="grid gap-4 md:grid-cols-3">
         {objectives.map((item) => (
