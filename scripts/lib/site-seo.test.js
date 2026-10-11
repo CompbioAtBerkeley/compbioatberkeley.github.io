@@ -57,12 +57,13 @@ test("the shared public-page registry covers every indexable site route", () => 
       "/",
       "/about/",
       "/calendar/",
+      "/newsletter/",
+      "/newsletter/fall-2026-newsletter-1/",
       "/collaborations/",
       "/officers/",
       "/signup/",
       "/contact/",
       "/privacy/",
-      "/developers/",
     ],
   );
   assert.ok(registry.every((page) => page.title && page.description));
@@ -71,10 +72,7 @@ test("the shared public-page registry covers every indexable site route", () => 
     registry.find((page) => page.path === "/signup/")?.title,
     "Join Us | Computational Biology at Berkeley",
   );
-  assert.equal(
-    registry.find((page) => page.path === "/developers/")?.markdownPath,
-    "/developers.md",
-  );
+  assert.equal(registry.some((page) => page.path === "/developers/"), false);
 });
 
 test("builds a sitemap containing each canonical public URL exactly once", () => {
@@ -182,7 +180,7 @@ test("publishes a useful no-JavaScript 404 recovery page", () => {
   assert.match(notFound, /href="\/llms\.txt"/);
   assert.match(notFound, /href="\/404\.md"/);
   assert.match(notFound, /rel="alternate" href="\/404\.md" type="text\/markdown"/);
-  assert.match(notFound, /href="\/developers\/"/);
+  assert.match(notFound, /href="\/newsletter\/"/);
   assert.match(notFound, /href="\/contact\/"/);
   assert.match(notFound, /<pre class="agent-recovery" aria-label="Markdown recovery">/);
   assert.match(
@@ -221,7 +219,7 @@ test("keeps 404 recovery links inside a GitHub project-pages base path", () => {
   assert.match(staged, /href="\/compbioatberkeley\.github\.io\/"/);
   assert.match(staged, /href="\/compbioatberkeley\.github\.io\/llms\.txt"/);
   assert.match(staged, /href="\/compbioatberkeley\.github\.io\/404\.md"/);
-  assert.match(staged, /href="\/compbioatberkeley\.github\.io\/developers\/"/);
+  assert.match(staged, /href="\/compbioatberkeley\.github\.io\/newsletter\/"/);
   assert.match(staged, /href="https:\/\/compbioatberkeley\.github\.io\/sitemap\.xml"/);
   assert.match(staged, /href="\/compbioatberkeley\.github\.io\/contact\/"/);
 });
@@ -251,7 +249,7 @@ test("llms.txt follows the agent guidance format and states capability boundarie
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/contact\//);
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/privacy\//);
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/agent-instructions\.md/);
-  assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/developers\//);
+  assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/newsletter\//);
   assert.match(llmsText, /https:\/\/compbioatberkeley\.github\.io\/developers\.md/);
   assert.match(llmsText, /https:\/\/forms\.gle\/qCxn93mfunF3Dtep7/);
   assert.doesNotMatch(llmsText, /## Fall 2026 recruitment/);
@@ -280,10 +278,6 @@ test("developer resources are discoverable and state exact capability boundaries
     "utf8",
   );
   const app = fs.readFileSync(new URL("../../src/App.tsx", import.meta.url), "utf8");
-  const page = fs.readFileSync(
-    new URL("../../src/pages/Developers.tsx", import.meta.url),
-    "utf8",
-  );
   const footer = fs.readFileSync(
     new URL("../../src/components/Footer.tsx", import.meta.url),
     "utf8",
@@ -301,13 +295,8 @@ test("developer resources are discoverable and state exact capability boundaries
     developers,
     /https:\/\/github\.com\/CompbioAtBerkeley\/compbioatberkeley\.github\.io/,
   );
-  assert.match(page, /https:\/\/compbioatberkeley\.github\.io\/sitemap\.xml/);
-  assert.match(
-    page,
-    /https:\/\/github\.com\/CompbioAtBerkeley\/compbioatberkeley\.github\.io/,
-  );
-  assert.match(app, /<Route path="\/developers" element={<Developers \/>} \/>/);
-  assert.match(footer, /\{ name: "developers", path: "\/developers\/" \}/);
+  assert.doesNotMatch(app, /path="\/developers"/);
+  assert.doesNotMatch(footer, /path: "\/developers\/"/);
 });
 
 test("marks staging output as noindex and lets crawlers observe that directive", () => {

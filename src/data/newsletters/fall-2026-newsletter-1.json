@@ -1,0 +1,98 @@
+{
+  "openingQuote": "We’re excited to begin the THIRD semester of our club and want to thank you for supporting Computational Biology at Berkeley!",
+  "opening": "As we are all coming back to Berkeley from a very restful (and hopefully productive) summer break, we’re thrilled to share what our team has been working on since last semester and highlight the promising computational biology opportunities available to our members in the months ahead.",
+  "events": [
+    {
+      "name": "General Meeting #2",
+      "date": "October 12th",
+      "time": "6 to 8 PM"
+    },
+    {
+      "name": "General Meeting #3",
+      "date": "November 17th",
+      "time": "6 to 8 PM"
+    },
+    {
+      "name": "General Meeting #4",
+      "date": "December 3rd",
+      "time": "6 to 8 PM"
+    }
+  ],
+  "introduction": {
+    "secretary": "Hi everyone! My name is Benjamin Tong, a second-year student studying Bioengineering and EECS at UC Berkeley, and I am your secretary for Computational Biology at Berkeley this semester. My role as secretary is to manage the newsletter and maintain the distribution of its content to keep our community updated on past, current, and future news on events and opportunities!",
+    "paragraphs": [
+      "Our club was founded last year by Saket Budhia and Anthea Guo, our founding co-presidents. We’ve been inspired by the enthusiasm the Berkeley community has shown for computational biology.",
+      "Throughout the Spring 2026 semester, we hosted a range of guest speakers from academia, startups, and the biotech industry, giving members the opportunity to learn about diverse career paths in the field. Many of our members also joined different committees within the club, contributing to event planning, collaborating on computational projects, and building meaningful connections with one another through organized socials and our end-of-semester retreat.",
+      "As a whole, Computational Biology at Berkeley’s mission is to bridge the gap between biology and computation through education, research, and community. This semester, we’re continuing to build on that foundation! In addition to our project and professional development committees, we’re relaunching our new bootcamp division that will introduce members to computational biology through a structured curriculum designed to make the field more accessible for people with for people of all experience levels."
+    ],
+    "presidents": "This fall, we’re welcoming new general and committee members. Our co-presidents, Priyam Baruah and Soumyadeep Talukdar, are planning for this to be the club’s most pivotal year yet, growing into an inclusive, supportive community for all students interested in computational biology. We’re incredibly excited about what’s ahead and look forward to another successful semester as we continue building the future of computational biology at Berkeley!"
+  },
+  "highlights": [
+    "Engaging general meetings featuring inspiring guest speakers and community-building socials",
+    "Innovative, hands-on projects designed to build real-world experience",
+    "Dynamic events that connect you with peers who share your interests"
+  ],
+  "spotlight": {
+    "intro": "During our first general meeting last semester, we had the honor of having Shane Brubaker speak about his education and career experiences as a computational biologist.",
+    "paragraphs": [
+      "As a Senior Manager of Bioinformatics Software Engineering at Myriad Genetics, his career consists of leveraging interdisciplinary research and biological insights to advance human health worldwide. His areas of expertise ranges from genetic testing, synthetic biology, brain modeling, and machine learning.",
+      "His passion for teaching is also seen with his experience at the University of Oregon, Lane Community College, and Joint Genome Institute, among other institutions. As he mentions: “Training the next generation of scientists is critical to address key problems in the environment, agricultural, and health sectors.”",
+      "In the second half of our general meeting, each committee project lead presented a short introduction and update on their respective team as we transitioned into a club wide social to wrap up our first general meeting of the Spring 2026 semester! Inviting industry and academia guest speakers to come and speak to members at our general meetings is an invaluable opportunity for everyone to gain new insights and connections with those working within the field."
+    ],
+    "caption": "Dr. Brubaker delivering his talks on the importance of bioinformatics, reflecting on the trajectory of computational biology and its diverse applications to a multitude of fields, such as medicine, healthcare, genomics, etc."
+  },
+  "workshop": [
+    "The Professional Development team also hosted a Resume & LinkedIn Workshop last semester focused on helping members craft strong, standout applications.",
+    "The session covered the fundamentals of building an effective resume and optimizing a LinkedIn profile, along with practical tips on how to differentiate yourself in a highly competitive applicant pool. Attendees left with actionable strategies to better showcase their experiences and stand out to recruiters.",
+    "This semester, the professional development committee, led by committee chairs, Tvisha Goel and Ashley Leon Martinez, will be hosting a similar upcoming workshop, so be sure to be on the look out for these opportunities to connect with peers and strengthen your professional profile."
+  ],
+  "projectsIntro": "During the spring, we led five computational biology projects, ranging from topics involving machine learning to genomics, in partnership with promising biotechnology companies.",
+  "projects": [
+    {
+      "title": "Project 1: Progenic Genomics",
+      "image": "progenic",
+      "text": "Designing polygenic risk scores (PRS) to be more personalized through clear interpretation. Combining multiple genetic risks across multiple traits could inflate risk estimates and reduce interpretability. This is why the team is developing mathematical models to clean up these estimates using linear algebra concepts and benchmarking using large-scale genomic datasets."
+    },
+    {
+      "title": "Project 2: Coagulant Therapeutics",
+      "image": "coagulant",
+      "text": "Utilizing computational drug discovery to study the interactions between therapeutic nanobodies with Activated Protein C (APC), which is a regulator of blood clotting. Through the integration of AlphaFold, HADDOCK, and Pymol for structural prediction, molecular docking, and visualization, respectively, this team is on the forefront of identifying and ranking the most promising candidates."
+    },
+    {
+      "title": "Project 3: Streamind Health",
+      "image": "streamind",
+      "text": "Constructing a biofeedback app for children with chronic pain in collaboration with Streamind Health. A prototype was developed Fall 2025, and the team is now focused on improving signal quality, while transitioning to a phone camera to develop a fully functional mobile app using remote photoplethysmography (rPPG) and guided breathing and heart rate biofeedback monitoring."
+    },
+    {
+      "title": "Project 4: Google DeepVariant",
+      "image": "deepvariant",
+      "text": "Combining AI applications with genomics to develop a powerful AI model to identify genetic variants from sequencing data. Using concepts such as gradient-based saliency tracking, attribution patching, and latent space clustering, the team is deploying their tools and models with the integration of the DeepVariant API for real-time wet-lab applications."
+    },
+    {
+      "title": "Project 5: NeuroAge Therapeutics",
+      "image": "neuroage",
+      "text": "NeuroAge Therapeutics is developing a biological aging clock using computational models to measure the biological age of various human organs with implications for Alzheimer’s disease research. Using multi-omics data from the UK Biobank, the team is applying machine learning techniques, including regularized regression, feature preprocessing, and data integration, to build this aging clock."
+    }
+  ],
+  "currentProjects": "With an outstanding pool of applicants this semester for the projects committee, we look forward to hosting some continuing projects, such as Streamind Health and NeuroAge Therapeutics, as well as introducing some new partnerships we have secured for our members. These new project offerings include NovaFlow, DrugRepAI, and many more*. Our Project Chairs, Bhavna Malladi and Sanjana Taware, have been working relentlessly with company partners to ensure a seamless project-matching experience for project members and all project committee members.",
+  "projectsNote": "*Project offerings are tentative and new opportunities may arise at the discretion of our executive board.",
+  "fallRecap": "This semester, we recently finished wrapping up our first general meeting in Cory Hall, introducing the new officer core and presenting an overall layout of what is expected from the club. We also did a “speed dating” social for members to socialize, organized by our internal vice presidents (IVPs), Vincy Huang and Aahan Sharma, as well as a post-meeting Menchie’s run!",
+  "bootcamp": [
+    "The New Member Bootcamp is an initiative led by Rithvik Kotla and Agastya Sarmah. This program is a beginner-friendly series designed to introduce members to the core areas of the field, from omics and precision medicine to drug development, structural biology, and AI in research. Through interactive workshops, real-world datasets, and guided projects, participants build both technical skills and intuition for how computational approaches drive modern biology. The program culminates in a final project presentation, where members form teams to apply what they’ve learned in a computational biology topic they are interested in.",
+    "Eventually, we hope to expand this bootcamp into an official DeCal to allow for more Berkeley students to get hands-on experience with computational biology with no background experience needed to succeed in this workshop series. We are trying to register the DeCal and to involve industry partners in refining the curriculum."
+  ],
+  "bootcampCaption": "Pictures of last semester’s curriculum chairs, Arjun Gurjar and Mahesh Arunachalam, delivering their introductions and assisting students with understanding bootcamp materials in a lively lecture environment.",
+  "closing": [
+    "Thank you to everyone who joined us this semester at GMs, workshops, and socials. Your curiosity, energy, and collaboration make this community so special, and we can’t wait to see you at more CB@B events!",
+    "We can’t wait to see you at our upcoming events and to hear more of your ideas, questions, and inspirations. We would also love your feedback on this newsletter. Please take a minute to fill out our anonymous feedback form, we would love to hear your input on our newsletter!",
+    "If you haven’t already, be sure to join our Slack to connect with fellow students, follow us on Instagram (@ucb_compbio) and LinkedIn for updates, and feel free to reach out to our co-presidents at priyambaruah1199@berkeley.edu or soumtalu@berkeley.edu to collaborate on projects or share your ideas.",
+    "Be sure to check out our dedicated club website as well, managed by our Web Development and Operations Leads, Hanson Wen and Qile Yang."
+  ],
+  "signoff": "Stay curious, keep exploring, and let’s continue building the future of computational biology together! 💙",
+  "links": {
+    "feedback": "https://forms.gle/vPKYjMz6scXJBNAg8",
+    "slack": "https://join.slack.com/t/compbioatberkeley/shared_invite/zt-4c32ifpvb-etM9rWmE0ITu5deHzcGIzA",
+    "linkedin": "https://www.linkedin.com/company/computational-biology-at-berkeley/posts/",
+    "website": "https://compbioatberkeley.github.io/"
+  }
+}

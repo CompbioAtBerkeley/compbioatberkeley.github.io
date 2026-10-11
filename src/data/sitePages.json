@@ -15,6 +15,16 @@
     "description": "View upcoming Computational Biology at Berkeley workshops, meetings, and special events in Pacific time."
   },
   {
+    "path": "/newsletter/",
+    "title": "Newsletter | Computational Biology at Berkeley",
+    "description": "Read the Computational Biology at Berkeley newsletter archive, with the newest editions first, preview slides, project updates, and community stories."
+  },
+  {
+    "path": "/newsletter/fall-2026-newsletter-1/",
+    "title": "Fall 2026 Newsletter 1 | Computational Biology at Berkeley",
+    "description": "Meet the Fall 2026 leadership team, revisit spring projects and events, and explore fall partnerships, upcoming meetings, and the new member bootcamp."
+  },
+  {
     "path": "/collaborations/",
     "title": "Collaborations | Computational Biology at Berkeley",
     "description": "Explore collaborators and partnership opportunities with Computational Biology at Berkeley students, researchers, and industry partners."
@@ -38,11 +48,5 @@
     "path": "/privacy/",
     "title": "Privacy | Computational Biology at Berkeley",
     "description": "Learn how the Computational Biology at Berkeley website uses analytics, embedded services, forms, and external community platforms."
-  },
-  {
-    "path": "/developers/",
-    "title": "Developer Resources | Computational Biology at Berkeley",
-    "description": "Find Computational Biology at Berkeley machine-readable resources and current API, OpenAPI, authentication, webhook, Markdown, and MCP capability status.",
-    "markdownPath": "/developers.md"
   }
 ]

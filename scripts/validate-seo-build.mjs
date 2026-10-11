@@ -146,17 +146,11 @@ for (const page of pages) {
       `home visible-text efficiency must be at least 5%; received ${(contentEfficiency * 100).toFixed(2)}%`,
     );
   }
-  if (["/contact/", "/privacy/", "/developers/"].includes(page.path)) {
+  if (["/contact/", "/privacy/"].includes(page.path)) {
     assert.ok(
       mainTextLength >= 500,
       `${page.path} trust content must contain at least 500 visible characters; received ${mainTextLength}`,
     );
-  }
-  if (page.path === "/developers/") {
-    assert.match(mainHtml, /API, authentication, webhook, and MCP status/);
-    assert.match(mainHtml, /no public application API or OpenAPI contract/i);
-    assert.match(mainHtml, /There is no live Model Context Protocol endpoint or manifest/i);
-    assert.match(mainHtml, /Same-URL Accept: text\/markdown content negotiation is not provided/i);
   }
   if (page.path === "/signup/") {
     assert.match(mainHtml, /Recruiting for fall 2026 has ended\./);
@@ -188,7 +182,7 @@ assert.match(notFound, /name="robots" content="noindex, nofollow"/);
 assert.match(notFound, /<h1[^>]*>Page not found<\/h1>/);
 assert.ok(notFound.includes(`href="${basePath}llms.txt"`));
 assert.ok(notFound.includes(`href="${basePath}404.md"`));
-assert.ok(notFound.includes(`href="${basePath}developers/"`));
+assert.ok(notFound.includes(`href="${basePath}newsletter/"`));
 assert.match(notFound, /rel="alternate" href="[^"]*404\.md" type="text\/markdown"/);
 assert.match(notFound, /<pre class="agent-recovery" aria-label="Markdown recovery">/);
 assert.match(notFound, /- Sitemap: https:\/\/compbioatberkeley\.github\.io\/sitemap\.xml/);

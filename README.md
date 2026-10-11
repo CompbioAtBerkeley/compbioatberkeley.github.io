@@ -73,3 +73,12 @@ reviewed and versioned before publication, so the same commit produces the same
 site in local, staging, and production environments. The separate weekly/manual
 drift workflow may read Notion with a read-only integration, but it cannot
 modify repository contents or publish candidate data.
+
+## Newsletter archive
+
+- `/newsletter/` lists editions by academic term and issue number, newest first. Add edition metadata to `src/data/newsletters.ts`. Do not infer a publication date from PDF metadata.
+- The first edition is `/newsletter/fall-2026-newsletter-1/`. Its text and embedded link targets were extracted from the supplied nine-page Fall 2026 draft into `src/data/newsletters/fall-2026-newsletter-1.json`. Column text was restored to reading order.
+- The reader uses a web editorial layout with the site’s blue and gold palette, responsive typography, a sticky section guide, reading progress, expandable project descriptions, and photo dialogs. The PDF supplies the content, photos, and captions, rather than page geometry. It contains no embedded PDF or whole-page image substitutes. Preview slides are HTML too.
+- Event photos are extracted WebP assets in `public/newsletters/fall-2026-newsletter-1/`. Project logos reuse `src/data/partners.ts` and the existing collabs assets. Google DeepVariant uses the collabs Google wordmark. Progenic’s existing asset is 119 by 200 pixels; it is displayed at a bounded size.
+- Add each new reader route to `src/data/sitePages.json` so the static build produces direct-link HTML and route metadata. Update `public/llms.txt` with the edition and its academic term.
+- `/developers/` has been removed. The separate machine-readable developer index remains at `/developers.md`.

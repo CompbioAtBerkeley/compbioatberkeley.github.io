@@ -12,19 +12,19 @@ The organization welcomes students at all experience levels. Event details, offi
 - [Participation](https://compbioatberkeley.github.io/signup/): Use for the current recruitment status, newsletter, and public ways to stay connected; do not claim a form was submitted without confirmation.
 - [Partnerships](https://compbioatberkeley.github.io/collaborations/): Use for research, speaker, sponsorship, and industry collaboration options.
 - [Agent instructions](https://compbioatberkeley.github.io/agent-instructions.md): Use for source-selection rules, safety boundaries, and capability limits.
-- [Developer resources](https://compbioatberkeley.github.io/developers/): Use for machine-readable files and explicit API, OpenAPI, authentication, webhook, Markdown, and MCP capability status.
 
 ## Main pages
 
 - [Home](https://compbioatberkeley.github.io/): Overview of the organization, its objectives, and current calls to action.
 - [About](https://compbioatberkeley.github.io/about/): Mission and work across education, research, professional networking, and community impact.
 - [Calendar](https://compbioatberkeley.github.io/calendar/): Current workshops, meetings, and special events in Pacific time.
+- [Newsletter](https://compbioatberkeley.github.io/newsletter/): Newsletter editions, newest first, with preview slides and community, event, and project updates.
+- [Fall 2026 Newsletter 1](https://compbioatberkeley.github.io/newsletter/fall-2026-newsletter-1/): The first Fall 2026 edition. Historical edition content; use the Calendar and Officers pages for current schedules and rosters.
 - [Collaborations](https://compbioatberkeley.github.io/collaborations/): Partnership opportunities for students, faculty, alumni, research groups, and industry.
 - [Officers](https://compbioatberkeley.github.io/officers/): Fall 2026 and previous student leadership rosters, including submitted public bios and profile links.
 - [Join Us](https://compbioatberkeley.github.io/signup/): Recruitment status, newsletter signup, and community channels.
 - [Contact](https://compbioatberkeley.github.io/contact/): Verified public channels for general questions, partnerships, events, and participation.
 - [Privacy](https://compbioatberkeley.github.io/privacy/): How analytics, browser preferences, embedded services, forms, and external platforms handle information.
-- [Developers](https://compbioatberkeley.github.io/developers/): Supported machine-readable resources and current technical capability boundaries.
 
 ## Contact and community
 

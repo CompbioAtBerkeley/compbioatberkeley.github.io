@@ -5,12 +5,12 @@ const quickLinks = [
   { name: "home", path: "/" },
   { name: "about", path: "/about/" },
   { name: "calendar", path: "/calendar/" },
+  { name: "Newsletter", path: "/newsletter/" },
   { name: "collaborations", path: "/collaborations/" },
   { name: "officers", path: "/officers/" },
   { name: "Join Us", path: "/signup/" },
   { name: "contact", path: "/contact/" },
   { name: "privacy", path: "/privacy/" },
-  { name: "developers", path: "/developers/" },
 ];
 
 const socialLinks = [

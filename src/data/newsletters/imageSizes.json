@@ -1,0 +1,50 @@
+{
+  "cover": {
+    "width": 1600,
+    "height": 1067
+  },
+  "fall-social": {
+    "width": 1600,
+    "height": 1067
+  },
+  "officer-info-session": {
+    "width": 1600,
+    "height": 1067
+  },
+  "co-presidents": {
+    "width": 1600,
+    "height": 1067
+  },
+  "bootcamp-lecture": {
+    "width": 1600,
+    "height": 1200
+  },
+  "project-community": {
+    "width": 900,
+    "height": 1200
+  },
+  "guest-speaker": {
+    "width": 1600,
+    "height": 1066
+  },
+  "resume-workshop": {
+    "width": 1599,
+    "height": 1200
+  },
+  "bootcamp-workshop": {
+    "width": 1600,
+    "height": 1200
+  },
+  "professional-development": {
+    "width": 1600,
+    "height": 1066
+  },
+  "benjamin-tong": {
+    "width": 1600,
+    "height": 1067
+  },
+  "shane-brubaker": {
+    "width": 1600,
+    "height": 1200
+  }
+}

@@ -42,7 +42,7 @@ const RouteMetadata = () => {
     const existingMarkdownAlternate = document.head.querySelector<HTMLLinkElement>(
       "link[data-route-markdown]",
     );
-    const markdownPath = page && "markdownPath" in page ? page.markdownPath : undefined;
+    const markdownPath = page && "markdownPath" in page && typeof page.markdownPath === "string" ? page.markdownPath : undefined;
     if (markdownPath) {
       const markdownAlternate = existingMarkdownAlternate ?? document.createElement("link");
       markdownAlternate.rel = "alternate";

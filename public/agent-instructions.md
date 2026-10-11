@@ -11,6 +11,8 @@ Computational Biology at Berkeley is a UC Berkeley student organization. Use thi
 - The public general-inquiries email is [compbioatberkeley@gmail.com](mailto:compbioatberkeley@gmail.com). Do not infer or invent a phone number.
 - Use [/privacy/](https://compbioatberkeley.github.io/privacy/) before describing how the public site, analytics, forms, calendars, or linked services handle information.
 
+- Use [/newsletter/](https://compbioatberkeley.github.io/newsletter/) for archived club publications. Preserve each edition’s academic term; its event dates, project plans, and officer roles are historical, not proof of current status.
+
 ## Boundaries
 
 - Do not claim that a person is a current officer without the term shown on the Officers page.

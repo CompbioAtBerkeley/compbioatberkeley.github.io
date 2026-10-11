@@ -16,7 +16,8 @@ import About from "./pages/About";
 import Calendar from "./pages/Calendar";
 import Collaborations from "./pages/Collaborations";
 import Contact from "./pages/Contact";
-import Developers from "./pages/Developers";
+import Newsletters from "./pages/Newsletters";
+import NewsletterIssue from "./pages/NewsletterIssue";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Officers from "./pages/Officers";
@@ -61,12 +62,13 @@ const StandardSite = () => (
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/calendar" element={<Calendar />} />
+        <Route path="/newsletter" element={<Newsletters />} />
+        <Route path="/newsletter/:slug" element={<NewsletterIssue />} />
         <Route path="/collaborations" element={<Collaborations />} />
         <Route path="/officers" element={<Officers />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
-        <Route path="/developers" element={<Developers />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </main>

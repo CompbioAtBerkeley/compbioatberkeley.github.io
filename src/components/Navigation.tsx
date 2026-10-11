@@ -10,6 +10,7 @@ const navItems = [
   { name: "home", path: "/" },
   { name: "about", path: "/about/" },
   { name: "calendar", path: "/calendar/" },
+  { name: "Newsletter", path: "/newsletter/" },
   { name: "collabs", path: "/collaborations/" },
   { name: "officers", path: "/officers/" },
 ];
@@ -59,7 +60,8 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const normalizePath = (path: string) => path === "/" ? path : path.replace(/\/$/, "");
-  const isActive = (path: string) => normalizePath(location.pathname) === normalizePath(path);
+  const isActive = (path: string) => normalizePath(location.pathname) === normalizePath(path)
+    || (path === "/newsletter/" && location.pathname.startsWith("/newsletter/"));
 
   useEffect(() => {
     setIsOpen(false);

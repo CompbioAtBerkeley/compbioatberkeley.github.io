@@ -6,7 +6,6 @@ Canonical public origin: [https://compbioatberkeley.github.io](https://compbioat
 
 ## Supported public resources
 
-- [Developer resource page](https://compbioatberkeley.github.io/developers/): Human-readable HTML version with the same capability status.
 - [Agent guide](https://compbioatberkeley.github.io/llms.txt): Concise source index and annotated public-page links.
 - [Agent instructions](https://compbioatberkeley.github.io/agent-instructions.md): Source-selection, freshness, safety, and action boundaries.
 - [Sitemap](https://compbioatberkeley.github.io/sitemap.xml): Canonical inventory of public HTML pages.
