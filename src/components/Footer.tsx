@@ -5,7 +5,7 @@ const quickLinks = [
   { name: "home", path: "/" },
   { name: "about", path: "/about/" },
   { name: "calendar", path: "/calendar/" },
-  { name: "Newsletter", path: "/newsletter/" },
+  { name: "newsletter", path: "/newsletter/" },
   { name: "collaborations", path: "/collaborations/" },
   { name: "officers", path: "/officers/" },
   { name: "Join Us", path: "/signup/" },
