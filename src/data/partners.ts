@@ -21,7 +21,7 @@ export const partners: Partner[] = [
     darkLogoPath: "partners/raster/streamind-dark.png",
     logoClassName: "max-h-28 w-full",
     collageClassName:
-      "col-span-2 md:left-[8%] md:top-[4%] md:w-[34%]",
+      "col-span-2 md:left-[8%] md:top-[8%] md:w-[34%]",
     brandSourceUrl:
       "https://static.wixstatic.com/media/18bc51_9fa019fc425a48e1a841d82ce7f1ca30~mv2.png",
   },
@@ -32,7 +32,7 @@ export const partners: Partner[] = [
     darkLogoPath: "partners/raster/neuroage-dark.png",
     logoClassName: "max-h-28 w-full",
     collageClassName:
-      "col-span-2 md:left-[58%] md:top-[5%] md:w-[38%]",
+      "col-span-2 md:left-[55%] md:top-[7%] md:w-[37%]",
     brandSourceUrl: "https://www.neuroagetx.com/img/logo.webp",
   },
   {
@@ -41,18 +41,8 @@ export const partners: Partner[] = [
     logoPath: "partners/raster/novaflow.png",
     logoClassName: "max-h-24 w-full",
     collageClassName:
-      "col-span-2 md:left-[10%] md:top-[29%] md:w-[32%]",
+      "col-span-2 md:left-[6%] md:top-[41%] md:w-[31%]",
     brandSourceUrl: "https://www.novaflowapp.com/",
-  },
-  {
-    name: "GeneXGen",
-    website: "https://www.genexgen.com/",
-    logoPath: "partners/raster/genegen.png",
-    logoClassName: "max-h-24 w-full",
-    collageClassName:
-      "col-span-2 md:left-[1%] md:top-[49%] md:w-[34%]",
-    sourceNote:
-      "Transparent reconstruction from the supplied reference; the current official website is genexgen.com.",
   },
   {
     name: "Google DeepVariant",
@@ -60,19 +50,9 @@ export const partners: Partner[] = [
     logoPath: "partners/raster/google-wordmark.png",
     logoClassName: "max-h-20 w-full",
     collageClassName:
-      "col-span-2 md:left-[46%] md:top-[39%] md:w-[31%]",
+      "col-span-2 md:left-[45%] md:top-[40%] md:w-[27%]",
     brandSourceUrl:
       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-  },
-  {
-    name: "UCSF",
-    website: "https://www.ucsf.edu/",
-    logoPath: "partners/raster/ucsf.png",
-    darkLogoPath: "partners/raster/ucsf-dark.png",
-    logoClassName: "max-h-32 w-full",
-    collageClassName:
-      "col-span-1 md:left-[58%] md:top-[57.5%] md:w-[16%]",
-    brandSourceUrl: "https://identity.ucsf.edu/brand-guide/logos",
   },
   {
     name: "Coagulant Therapeutics",
@@ -81,7 +61,7 @@ export const partners: Partner[] = [
     darkLogoPath: "partners/raster/coagulant-dark.png",
     logoClassName: "max-h-24 w-full",
     collageClassName:
-      "col-span-2 md:left-[31%] md:top-[76.5%] md:w-[42%]",
+      "col-span-2 md:left-[46%] md:top-[75%] md:w-[43%]",
     brandSourceUrl:
       "https://images.squarespace-cdn.com/content/v1/6154cdcf4a92db78fc554755/75dd0feb-5f86-47fc-9f1a-72edeebe2f1a/Coagulant+Therapeutics+Logo_RGB.png?format=1500w",
   },
@@ -92,7 +72,7 @@ export const partners: Partner[] = [
     darkLogoPath: "partners/raster/drugrepai-dark.png",
     logoClassName: "max-h-24 w-full",
     collageClassName:
-      "col-span-2 md:left-[1%] md:top-[76%] md:w-[26%]",
+      "col-span-2 md:left-[10%] md:top-[76%] md:w-[27%]",
     sourceNote: "Official logo supplied by the partner on August 14, 2026.",
   },
   {
@@ -102,7 +82,7 @@ export const partners: Partner[] = [
     darkLogoPath: "partners/raster/progenic-dark.png",
     logoClassName: "max-h-52 w-auto",
     collageClassName:
-      "col-span-1 md:left-[85%] md:top-[48%] md:w-[11%]",
+      "col-span-2 md:left-[81%] md:top-[34%] md:w-[11%]",
     brandSourceUrl:
       "https://progenicgenomics.com/wp-content/uploads/2025/05/cropped-PrognicLogo-Colored.png",
   },
